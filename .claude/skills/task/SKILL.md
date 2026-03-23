@@ -38,7 +38,7 @@ obsidian create name="[date]-[slug]" path="Notes/" content="---
 date: [date]
 type: task
 due: [date or leave blank]
-tags: [[#task], [#status/active]]
+tags: [task, status/active]
 ---
 
 # [Task title]

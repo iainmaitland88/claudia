@@ -29,7 +29,7 @@ Input: $ARGUMENTS
    obsidian create name="[date]-[slug]" path="Notes/" content="---
    date: [date]
    type: work
-   tags: [[#work/TAG], [#status/done]]
+   tags: [work/TAG, status/done]
    ---
 
    # [Achievement title]

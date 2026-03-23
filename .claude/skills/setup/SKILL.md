@@ -135,7 +135,7 @@ If a file doesn't exist, create it with `obsidian create`. Use the content templ
 
 **Atlas/Work.md**:
 ```bash
-obsidian create path="Atlas/Work.md" content="Map of all work achievement notes. Primary source for performance review summaries.\n\n## $(date +%Y)\n\n### Q1 (Jan–Mar)\n\n### Q2 (Apr–Jun)\n\n### Q3 (Jul–Sep)\n\n### Q4 (Oct–Dec)\n\n---\n\n## Tags\n#work/shipped — #work/unblocked — #work/led — #work/learned — #work/improved"
+obsidian create path="Atlas/Work.md" content="Map of all work achievement notes. Primary source for performance review summaries.\n\n## $(date +%Y)\n\n### Q1 (Jan–Mar)\n\n### Q2 (Apr–Jun)\n\n### Q3 (Jul–Sep)\n\n### Q4 (Oct–Dec)\n\n---\n\n## Tags\nwork/shipped — work/unblocked — work/led — work/learned — work/improved"
 ```
 
 **Atlas/Ideas.md**:
@@ -163,7 +163,7 @@ obsidian create path="Atlas/Knowledge.md" content="## Engineering\n\n## Process 
 For each of `goal-health`, `goal-sleep`, `goal-fitness`, `goal-diet`, check if it exists and create if not.
 
 ```bash
-obsidian create path="Notes/goal-health.md" content="---\ntype: goal\npersona: health\ntags:\n  - \"#goal/health\"\nlast-reviewed: \"\"\ntarget: \"\"\nmetric: \"\"\n---\n\n# Health\n\n## Goal\n\n## Why It Matters\n\n## Current Approach\n\n## Recent Adjustments\n\n| Date | Change | Why |\n|------|--------|-----|\n\n## Commitments This Week\n\n- [ ]\n\n## Data Log\n\n| Date | Value | Notes |\n|------|-------|-------|\n\n## Review History\n\n| Date | Trend | Assessment |\n|------|-------|------------|"
+obsidian create path="Notes/goal-health.md" content="---\ntype: goal\npersona: health\ntags:\n  - goal/health\nlast-reviewed: \"\"\ntarget: \"\"\nmetric: \"\"\n---\n\n# Health\n\n## Goal\n\n## Why It Matters\n\n## Current Approach\n\n## Recent Adjustments\n\n| Date | Change | Why |\n|------|--------|-----|\n\n## Commitments This Week\n\n- [ ]\n\n## Data Log\n\n| Date | Value | Notes |\n|------|-------|-------|\n\n## Review History\n\n| Date | Trend | Assessment |\n|------|-------|------------|"
 ```
 
 Repeat for sleep, fitness, diet — substituting the persona name and tag in each.

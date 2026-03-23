@@ -25,7 +25,7 @@ Input: $ARGUMENTS
    obsidian create name="[date]-[slug]" path="Notes/" content="---
    date: [date]
    type: idea
-   tags: [[#idea/TAG], [#status/unrefined]]
+   tags: [idea/TAG, status/unrefined]
    ---
 
    # [Idea title]
