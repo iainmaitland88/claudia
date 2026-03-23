@@ -30,9 +30,20 @@ The system uses [Claude Code](https://claude.ai/code) custom skills as the inter
 git clone https://github.com/iainmaitland88/claudia.git ~/Code/iainmaitland88/claudia
 ```
 
-### 2. Update paths
+### 2. Run the setup skill
 
-This repo contains hardcoded paths. Update them to match your machine:
+The `/setup` skill handles everything — path configuration, vault structure, seeding files, and installing the cron reminder.
+
+```bash
+cd ~/Code/iainmaitland88/claudia && claude
+/setup
+```
+
+It will ask you four questions (name, vault path, weekly review schedule, work role) and then configure everything automatically. Skip to [step 6](#6-enable-the-obsidian-cli) when it's done.
+
+---
+
+**Or configure manually** if you prefer:
 
 **`CLAUDE.md`** — change the `Vault` path:
 ```
@@ -114,7 +125,17 @@ Type `/daily` to run your first morning briefing.
 
 Skills are Claude Code slash commands. Run them from inside a `claude` session started from this directory.
 
-> **Note:** All skills use the Obsidian CLI, which requires Obsidian to be open and running. The session-start hook uses direct file access and works regardless.
+> **Note:** All skills except `/setup` use the Obsidian CLI, which requires Obsidian to be open and running. The session-start hook uses direct file access and works regardless.
+
+### `/setup` — First-time setup
+
+Run this once after cloning. Walks you through a short questionnaire, then automatically configures paths, creates the vault folder structure, seeds all required files, and installs the weekly reminder cron job.
+
+```
+/setup
+```
+
+---
 
 ### `/daily` — Morning briefing
 
@@ -496,6 +517,7 @@ claudia/
 │   ├── hooks/
 │   │   └── session-start.sh           ← Injects vault status at every session start
 │   └── skills/
+│       ├── setup/SKILL.md
 │       ├── daily/SKILL.md
 │       ├── weekly/SKILL.md
 │       ├── log/SKILL.md

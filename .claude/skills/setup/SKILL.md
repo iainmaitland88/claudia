@@ -1,5 +1,5 @@
 ---
-name: init
+name: setup
 description: Initialise claudia for a new user — sets up paths, vault structure, and cron reminder
 ---
 
