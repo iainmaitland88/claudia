@@ -4,7 +4,7 @@ description: Log a concrete task with an optional deadline — surfaces in daily
 argument-hint: <task description, optionally including a deadline>
 ---
 
-Capture an action item. Today: !`date +%Y-%m-%d`.
+Capture a task. Today: !`date +%Y-%m-%d`.
 
 Input: $ARGUMENTS
 
@@ -26,7 +26,7 @@ Input: $ARGUMENTS
 ### 5a — Line item
 
 ```bash
-obsidian append file="Atlas/Actions" content="- [ ] [task description] | Due: YYYY-MM-DD"
+obsidian append file="Atlas/Tasks" content="- [ ] [task description] | Due: YYYY-MM-DD"
 ```
 (Omit `| Due:` part if no deadline.)
 
@@ -36,9 +36,9 @@ Create the note:
 ```bash
 obsidian create name="[date]-[slug]" path="Notes/" content="---
 date: [date]
-type: action
+type: task
 due: [date or leave blank]
-tags: [[#action], [#status/active]]
+tags: [[#task], [#status/active]]
 ---
 
 # [Task title]
@@ -57,13 +57,13 @@ tags: [[#action], [#status/active]]
 "
 ```
 
-Then link it from the Actions atlas:
+Then link it from the Tasks atlas:
 ```bash
-obsidian append file="Atlas/Actions" content="- [ ] [[date-slug]] | Due: YYYY-MM-DD"
+obsidian append file="Atlas/Tasks" content="- [ ] [[date-slug]] | Due: YYYY-MM-DD"
 ```
 
-6. Confirm: "Added. You have [N] open actions."
+6. Confirm: "Added. You have [N] open tasks."
 
 ---
 
-**Expanding a line item to a note**: If the user asks to "expand" an existing line item, create the full note for it, then update Atlas/Actions.md — replace the plain-text line with `[[note-slug]]`.
+**Expanding a line item to a note**: If the user asks to "expand" an existing line item, create the full note for it, then update Atlas/Tasks.md — replace the plain-text line with `[[note-slug]]`.

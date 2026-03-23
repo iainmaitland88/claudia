@@ -11,7 +11,7 @@ A personal knowledge base (PKB) built on Claude Code and Obsidian. Not a product
 - **Logs work achievements** as individual notes, so when performance review season arrives your highlight reel is already written
 - **Captures ideas** before they're forgotten, tracks them from unrefined to active project to shipped
 - **Plans your day** each morning with a briefing that flags what's urgent, what's stale, and what needs your attention
-- **Reviews your week** every Friday — surfaces forgotten actions, stale ideas, and checks in on long-term goals
+- **Reviews your week** every Friday — surfaces forgotten tasks, stale ideas, and checks in on long-term goals
 - **Tracks long-term goals** with structured data logging and trend analysis (weight loss, sleep, fitness, diet, anything with a measurable metric)
 
 The system uses [Claude Code](https://claude.ai/code) custom skills as the interface and an [Obsidian](https://obsidian.md) vault as the storage layer. Claude reads and writes vault notes via the Obsidian CLI. Obsidian renders the graph, backlinks, and Dataview queries.
@@ -84,7 +84,7 @@ Run this once after cloning. Walks you through a short questionnaire, then autom
 
 Reads your vault and produces a focused morning briefing:
 
-- Overdue and upcoming actions (from `Atlas/Actions.md`)
+- Overdue and upcoming tasks (from `Atlas/Tasks.md`)
 - Stale unrefined ideas (>7 days without a decision)
 - Yesterday's unchecked tasks
 - Signals: last work note date, last weekly review date
@@ -131,7 +131,7 @@ Creates a linked note for an idea and adds it to `Atlas/Ideas.md` under "Unrefin
 
 ### `/task` — Task capture
 
-Adds a concrete task with an optional deadline to `Atlas/Actions.md`. Overdue items appear in every morning briefing until ticked off.
+Adds a concrete task with an optional deadline to `Atlas/Tasks.md`. Overdue items appear in every morning briefing until ticked off.
 
 ```
 /task Renew driving license before April 17th
@@ -144,7 +144,7 @@ For tasks that need context, links, or file attachments, mention them — Claude
 /task Set up the new staging environment — needs the AWS credentials from 1Password and the runbook Jake sent
 ```
 
-To expand a simple line item into a full note later: "expand the driving license action into a note."
+To expand a simple line item into a full note later: "expand the driving license task into a note."
 
 ---
 
@@ -177,7 +177,7 @@ At performance review time: "Summarise my work on the codegen project." Claude r
 Meant for Friday afternoons. Reads your whole week and surfaces what needs attention:
 
 - What got done (from work notes and daily notes)
-- Overdue actions
+- Overdue tasks
 - Stale unrefined ideas that need a decision
 - Goal check-in across all four personas
 
@@ -217,7 +217,7 @@ Obsidian Vault/
 ├── Atlas/
 │   ├── Work.md             ← Hub for all work achievement notes
 │   ├── Ideas.md            ← Hub for all idea and project notes
-│   ├── Actions.md          ← Open tasks with deadlines
+│   ├── Tasks.md            ← Open tasks with deadlines
 │   ├── Goals.md            ← Links to the four goal persona notes
 │   └── Knowledge.md        ← Hub for learnings and reference material
 ├── Notes/                  ← All individual notes (flat, no subfolders)
@@ -225,7 +225,7 @@ Obsidian Vault/
 │   ├── goal-sleep.md
 │   ├── goal-fitness.md
 │   ├── goal-diet.md
-│   └── YYYY-MM-DD-slug.md  ← Ideas, work entries, actions, projects, weekly reviews
+│   └── YYYY-MM-DD-slug.md  ← Ideas, work entries, tasks, projects, weekly reviews
 ├── Daily Notes/
 │   ├── Templates/
 │   │   └── Daily Note.md

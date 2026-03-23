@@ -18,9 +18,9 @@ Run a morning planning session. Today's date: !`date +%Y-%m-%d`.
    obsidian daily:read
    ```
 
-3. **Check Actions** for due dates and overdue items:
+3. **Check Tasks** for due dates and overdue items:
    ```bash
-   obsidian read file="Atlas/Actions"
+   obsidian read file="Atlas/Tasks"
    ```
    Parse all `## Open` lines. Flag anything with `Due:` date on or before today as OVERDUE. Flag anything due within 7 days as "Coming up".
 
@@ -54,7 +54,7 @@ Run a morning planning session. Today's date: !`date +%Y-%m-%d`.
 ## Morning Briefing — [date]
 
 **Urgent**
-[OVERDUE actions and actions due today/tomorrow — or "Nothing urgent"]
+[OVERDUE tasks and tasks due today/tomorrow — or "Nothing urgent"]
 
 **Coming up** (due within 7 days)
 [List or "None"]

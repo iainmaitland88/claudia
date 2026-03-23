@@ -135,27 +135,27 @@ If a file doesn't exist, create it with `obsidian create`. Use the content templ
 
 **Atlas/Work.md**:
 ```bash
-obsidian create path="Atlas/Work.md" content="# Work\n\nMap of all work achievement notes. Primary source for performance review summaries.\n\n## $(date +%Y)\n\n### Q1 (Jan–Mar)\n\n### Q2 (Apr–Jun)\n\n### Q3 (Jul–Sep)\n\n### Q4 (Oct–Dec)\n\n---\n\n## Tags\n#work/shipped — #work/unblocked — #work/led — #work/learned — #work/improved"
+obsidian create path="Atlas/Work.md" content="Map of all work achievement notes. Primary source for performance review summaries.\n\n## $(date +%Y)\n\n### Q1 (Jan–Mar)\n\n### Q2 (Apr–Jun)\n\n### Q3 (Jul–Sep)\n\n### Q4 (Oct–Dec)\n\n---\n\n## Tags\n#work/shipped — #work/unblocked — #work/led — #work/learned — #work/improved"
 ```
 
 **Atlas/Ideas.md**:
 ```bash
-obsidian create path="Atlas/Ideas.md" content="# Ideas\n\nMap of all idea notes. Reviewed weekly — stale unrefined ideas get a decision.\n\n## Unrefined\n\n## Active\n\n## Archived"
+obsidian create path="Atlas/Ideas.md" content="Map of all idea notes. Reviewed weekly — stale unrefined ideas get a decision.\n\n## Unrefined\n\n## Active\n\n## Archived"
 ```
 
-**Atlas/Actions.md**:
+**Atlas/Tasks.md**:
 ```bash
-obsidian create path="Atlas/Actions.md" content="# Actions\n\nOne-off tasks with deadlines. Reviewed daily — overdue items are flagged immediately.\n\n## Open\n\n## Done"
+obsidian create path="Atlas/Tasks.md" content="One-off tasks with deadlines. Reviewed daily — overdue items are flagged immediately.\n\n## Open\n\n## Done"
 ```
 
 **Atlas/Goals.md**:
 ```bash
-obsidian create path="Atlas/Goals.md" content="# Goals\n\n- [[goal-health]] — physical health, weight, energy\n- [[goal-sleep]] — sleep quality and consistency\n- [[goal-fitness]] — exercise, strength, endurance\n- [[goal-diet]] — nutrition and eating habits"
+obsidian create path="Atlas/Goals.md" content="- [[goal-health]] — physical health, weight, energy\n- [[goal-sleep]] — sleep quality and consistency\n- [[goal-fitness]] — exercise, strength, endurance\n- [[goal-diet]] — nutrition and eating habits"
 ```
 
 **Atlas/Knowledge.md**:
 ```bash
-obsidian create path="Atlas/Knowledge.md" content="# Knowledge\n\n## Engineering\n\n## Process & Craft\n\n## Personal\n\n## Reference"
+obsidian create path="Atlas/Knowledge.md" content="## Engineering\n\n## Process & Craft\n\n## Personal\n\n## Reference"
 ```
 
 ### 4c. Seed goal notes

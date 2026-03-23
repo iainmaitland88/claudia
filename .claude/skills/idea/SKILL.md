@@ -34,7 +34,7 @@ Input: $ARGUMENTS
 
    **Why it matters**:
 
-   **Next action**:
+   **Next task**:
    "
    ```
 

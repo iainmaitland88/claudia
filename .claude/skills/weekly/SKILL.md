@@ -18,9 +18,9 @@ Run a weekly review. Today: !`date +%Y-%m-%d`. Current week: !`date +%Y-W%V`.
    obsidian read file="Atlas/Work"
    ```
 
-3. **Read Actions** for overdue and upcoming items:
+3. **Read Tasks** for overdue and upcoming items:
    ```bash
-   obsidian read file="Atlas/Actions"
+   obsidian read file="Atlas/Tasks"
    ```
    Parse all open items. Flag overdue (past due date) and due within 7 days.
 
@@ -51,7 +51,7 @@ Run a weekly review. Today: !`date +%Y-%m-%d`. Current week: !`date +%Y-W%V`.
 ### What Got Done This Week
 [Real achievements from work notes and daily notes — specific, not vague]
 
-### Actions
+### Tasks
 **Overdue:** [list with days past due, or "None"]
 **Due this week:** [list or "None"]
 
@@ -71,7 +71,7 @@ For each stale idea:
 
 ## After Showing
 
-1. For each stale idea, ask: "Keep and assign a next action, or archive?"
+1. For each stale idea, ask: "Keep and assign a next task, or archive?"
    - If keeping: update the note's tag from `#status/unrefined` to `#status/refined` using:
      ```bash
      obsidian properties:set file="[note]" key="tags" value="..."
