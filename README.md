@@ -7,7 +7,7 @@ A personal knowledge base (PKB) built on Claude Code and Obsidian. Not a product
 - **Logs work achievements** as individual notes, so when performance review season arrives your highlight reel is already written
 - **Captures ideas** before they're forgotten, tracks them from inbox to active project to shipped
 - **Plans your day** each morning with a briefing that flags what's urgent, what's stale, and what needs your attention
-- **Reviews your week** every Sunday — surfaces forgotten actions, stale ideas, and checks in on long-term goals
+- **Reviews your week** every Friday — surfaces forgotten actions, stale ideas, and checks in on long-term goals
 - **Tracks long-term goals** with structured data logging and trend analysis (weight loss, sleep, fitness, diet, anything with a measurable metric)
 
 The system uses [Claude Code](https://claude.ai/code) custom skills as the interface and an [Obsidian](https://obsidian.md) vault as the storage layer. Claude reads and writes vault notes via the Obsidian CLI. Obsidian renders the graph, backlinks, and Dataview queries.
@@ -210,7 +210,7 @@ At performance review time: "Summarise my work on the codegen project." Claude r
 
 ### `/weekly` — Weekly review
 
-Meant for Sunday evenings. Reads your whole week and surfaces what needs attention:
+Meant for Friday afternoons. Reads your whole week and surfaces what needs attention:
 
 - What got done (from work notes and daily notes)
 - Overdue actions
@@ -314,7 +314,7 @@ The `Atlas/` folder holds **Maps of Content (MOCs)** — index notes that link t
 | Idea appears | `/idea the idea` | 5 sec |
 | Task to remember | `/action what to do by when` | 5 sec |
 | Idea becomes real | `/promote idea name` | 2 min |
-| Sunday evening | `/weekly` | ~10 min |
+| Friday afternoon | `/weekly` | ~10 min |
 | Goal check-in | `/review-goals` | ~5 min |
 | Perf review season | "Summarise my work in Q1" | 0 prep — already logged |
 
