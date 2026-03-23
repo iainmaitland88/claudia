@@ -117,23 +117,14 @@ chmod +x .claude/hooks/session-start.sh scripts/weekly-reminder.sh
 
 Use the Obsidian CLI for all vault operations from this point on. If the user has multiple vaults, add `vault="VAULT_NAME"` to each command.
 
-### 4a. Create folders by creating a placeholder in each, then removing it
-
-For each folder (00-Inbox, Notes, Atlas, Archive, Daily Notes/Templates), check if it exists and create it if not. The CLI creates parent folders when a file is created:
+Folders are created automatically when files are created via `obsidian create path=`. Most folders will be created when seeding files below. For empty folders (`00-Inbox/` and `Archive/`), create them via the filesystem:
 
 ```bash
-obsidian files path="Atlas/" 2>&1 | head -1
+VAULT_PATH="[vault path from Q2]"
+mkdir -p "$VAULT_PATH/00-Inbox" "$VAULT_PATH/Archive"
 ```
 
-If the folder doesn't exist, create a temporary file to establish it:
-```bash
-obsidian create name=".gitkeep" path="Atlas/"
-obsidian delete path="Atlas/.gitkeep.md"
-```
-
-Do this for: `00-Inbox/`, `Notes/`, `Atlas/`, `Archive/`, `Daily Notes/Templates/`
-
-### 4b. Seed Atlas files
+### 4a. Seed Atlas files
 
 Only create each file if it does not already exist. Check with:
 ```bash
