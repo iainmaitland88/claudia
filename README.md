@@ -95,10 +95,10 @@ crontab -e
 
 Add:
 ```
-0 18 * * 0 /Users/YOUR_USERNAME/Code/iainmaitland88/claudia/scripts/weekly-reminder.sh
+30 16 * * 5 /Users/YOUR_USERNAME/Code/iainmaitland88/claudia/scripts/weekly-reminder.sh
 ```
 
-This sends a macOS notification every Sunday at 6pm.
+This sends a macOS notification every Friday at 4:30pm.
 
 ### 10. First run
 
