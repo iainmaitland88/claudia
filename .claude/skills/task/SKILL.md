@@ -1,5 +1,5 @@
 ---
-name: action
+name: task
 description: Log a concrete task with an optional deadline — surfaces in daily briefings
 argument-hint: <task description, optionally including a deadline>
 ---

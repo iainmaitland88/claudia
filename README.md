@@ -130,19 +130,19 @@ Creates a linked note for an idea and adds it to `Atlas/Ideas.md` under "Inbox".
 
 ---
 
-### `/action` — Task capture
+### `/task` — Task capture
 
 Adds a concrete task with an optional deadline to `Atlas/Actions.md`. Overdue items appear in every morning briefing until ticked off.
 
 ```
-/action Renew driving license before April 17th
-/action Reply to Jake's email about the API review by end of week
+/task Renew driving license before April 17th
+/task Reply to Jake's email about the API review by end of week
 ```
 
 For tasks that need context, links, or file attachments, mention them — Claude creates a full note instead of a line item:
 
 ```
-/action Set up the new staging environment — needs the AWS credentials from 1Password and the runbook Jake sent
+/task Set up the new staging environment — needs the AWS credentials from 1Password and the runbook Jake sent
 ```
 
 To expand a simple line item into a full note later: "expand the driving license action into a note."
@@ -277,7 +277,7 @@ The `Atlas/` folder holds **Maps of Content (MOCs)** — index notes that link t
 | Morning | `/daily` | ~2 min |
 | Shipped something | `/log what you did and why it mattered` | 10 sec |
 | Idea appears | `/idea the idea` | 5 sec |
-| Task to remember | `/action what to do by when` | 5 sec |
+| Task to remember | `/task what to do by when` | 5 sec |
 | Idea becomes real | `/promote idea name` | 2 min |
 | Friday afternoon | `/weekly` | ~10 min |
 | Goal check-in | `/review-goals` | ~5 min |
@@ -314,7 +314,7 @@ claudia/
 │       ├── weekly/SKILL.md
 │       ├── log/SKILL.md
 │       ├── idea/SKILL.md
-│       ├── action/SKILL.md
+│       ├── task/SKILL.md
 │       ├── promote/SKILL.md
 │       └── review-goals/SKILL.md
 └── scripts/

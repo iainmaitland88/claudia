@@ -171,7 +171,7 @@ Repeat for sleep, fitness, diet — substituting the persona name and tag in eac
 ### 4d. Create the daily note template
 
 ```bash
-obsidian create path="Daily Notes/Templates/Daily Note.md" content="---\ndate: {{date:YYYY-MM-DD}}\ntype: daily\n---\n\n# {{date:dddd, MMMM D, YYYY}}\n\n## Focus\n> What's the one thing that makes today a success?\n\n## Tasks\n- [ ]\n\n## Morning Metrics\n> Log any tracked goal metrics here (e.g. weight, sleep hours)\n\n## Notes & Ideas\n> Anything worth capturing? Use /idea or /action if it needs tracking.\n\n## Work\n> Anything shipped or unblocked today? Use /log to record it.\n\n## End of Day\n- [ ] Anything worth logging with /log?\n- [ ] Any new ideas captured?\n- [ ] Inbox cleared or triaged?"
+obsidian create path="Daily Notes/Templates/Daily Note.md" content="---\ndate: {{date:YYYY-MM-DD}}\ntype: daily\n---\n\n# {{date:dddd, MMMM D, YYYY}}\n\n## Focus\n> What's the one thing that makes today a success?\n\n## Tasks\n- [ ]\n\n## Morning Metrics\n> Log any tracked goal metrics here (e.g. weight, sleep hours)\n\n## Notes & Ideas\n> Anything worth capturing? Use /idea or /task if it needs tracking.\n\n## Work\n> Anything shipped or unblocked today? Use /log to record it.\n\n## End of Day\n- [ ] Anything worth logging with /log?\n- [ ] Any new ideas captured?\n- [ ] Inbox cleared or triaged?"
 ```
 
 ### 4e. Configure the daily note template setting
