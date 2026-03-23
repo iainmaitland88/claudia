@@ -1,105 +1,109 @@
 ---
 name: setup
-description: Initialise claudia for a new user — sets up paths, vault structure, and cron reminder
+description: Initialise claudia for a new user — walks through prerequisites, then uses the Obsidian CLI to set up the vault
 ---
 
 Welcome to claudia. This will configure the system for your machine.
 
-Do NOT use the Obsidian CLI during this skill — it won't be set up yet. Use Read, Edit, Write, and Bash tools only.
-
 ---
 
-## Step 1 — Detect the project path
+## Phase 1 — Prerequisites (requires user action)
 
-Run:
+### Step 1 — Detect the project path
+
 ```bash
 pwd
 ```
-This is the claudia project directory. Store it — you'll need it for the cron entry.
+
+Store this as PROJECT_PATH — you'll need it throughout.
+
+### Step 2 — Check Obsidian is installed
+
+```bash
+which obsidian 2>/dev/null || echo "not found"
+```
+
+If not found, tell the user:
+
+> **Before we continue, you need Obsidian installed with the CLI enabled.**
+>
+> 1. Download and install Obsidian from https://obsidian.md (v1.12.4 or later)
+> 2. Open Obsidian and create a vault (or open an existing one)
+> 3. Go to **Settings → General → Command line interface → Register CLI**
+> 4. Come back here and tell me when you're done.
+
+**Wait for the user to confirm before continuing.**
+
+### Step 3 — Verify CLI is working
+
+```bash
+obsidian version
+```
+
+If this fails, the CLI isn't registered. Ask the user to check the Obsidian setting and try again. Do NOT proceed until this command succeeds.
 
 ---
 
-## Step 2 — Questionnaire
+## Phase 2 — Questionnaire
 
-Ask the following questions **one at a time**, waiting for each answer before proceeding.
-
----
+Ask the following questions **one at a time**, waiting for each answer.
 
 **Q1: What's your name?**
 
-This is used to personalise CLAUDE.md.
+Used to personalise CLAUDE.md.
 
 ---
 
 **Q2: Where is your Obsidian vault?**
 
-First, try to auto-detect by searching for Obsidian vaults on the machine:
+Auto-detect first:
 ```bash
-find ~ -name ".obsidian" -maxdepth 5 -type d 2>/dev/null | sed 's|/.obsidian||'
+obsidian vaults
 ```
 
-If one or more vaults are found, show them as options:
-> "Found these Obsidian vaults:
-> 1. /Users/you/Documents/Obsidian Vault
-> 2. /Users/you/Documents/Notes
-> Which one, or enter a custom path?"
+Show the results and ask which vault to use, or let them enter a custom path. Store the vault name and path.
 
-If none are found, ask:
-> "No Obsidian vault found automatically. What's the full path to your vault? (e.g. ~/Documents/Obsidian Vault)"
-
-Expand `~` to the full home directory path before using it.
+If they need to target a specific vault in later CLI commands, use `vault="VAULT_NAME"` parameter.
 
 ---
 
 **Q3: When do you want your weekly review reminder?**
 
 Ask for the day:
-> "Which day should the weekly review reminder fire? (e.g. Friday, Sunday)"
+> "Which day for the weekly review reminder? (e.g. Friday, Sunday)"
 
 Then the time:
 > "What time? (e.g. 4:30pm, 17:00)"
 
 Convert to cron format:
 - Day names → numbers: Monday=1, Tuesday=2, Wednesday=3, Thursday=4, Friday=5, Saturday=6, Sunday=0
-- Time → `MINUTE HOUR`: e.g. "4:30pm" → `30 16`, "9am" → `0 9`, "17:00" → `0 17`
+- Time → `MINUTE HOUR`: e.g. "4:30pm" → `30 16`, "9am" → `0 9`
 
 ---
 
 **Q4: What kind of work do you do?**
 
-This goes into CLAUDE.md so Claude understands what counts as a meaningful work achievement.
-
 > "What's your role? (e.g. software engineer, product manager, designer — a sentence is fine)"
 
 ---
 
-## Step 3 — Update project files
+## Phase 3 — Update project files
+
+Use the Read and Edit tools for these.
 
 ### 3a. Update CLAUDE.md
 
-Read the current CLAUDE.md:
-```bash
-cat CLAUDE.md
-```
-
-Make these replacements:
-- Replace the `Vault` path with the vault path from Q2
-- Replace the `Who` section with the user's name and role from Q1 and Q4
-- Replace the `goal-health.md`, `goal-sleep.md`, `goal-fitness.md`, `goal-diet.md` paths to use the correct vault path
-
-Use the Edit tool to make these changes precisely.
+Read `CLAUDE.md` and update:
+- The `Vault` path with the vault path from Q2
+- The `Who` section with the user's name (Q1) and role (Q4)
 
 ### 3b. Update session-start.sh
 
-Read `.claude/hooks/session-start.sh` and update the `VAULT=` line with the correct path.
-
-Use the Edit tool.
+Read `.claude/hooks/session-start.sh` and update the `VAULT=` line with the correct vault path.
 
 ### 3c. Update weekly-reminder.sh
 
-Read `scripts/weekly-reminder.sh` and update the notification message to include the correct project path (so the user can copy-paste the `cd` command from the notification).
-
-Use the Edit tool.
+Read `scripts/weekly-reminder.sh` and update the notification message to include the correct project path.
 
 ### 3d. Make scripts executable
 
@@ -109,229 +113,139 @@ chmod +x .claude/hooks/session-start.sh scripts/weekly-reminder.sh
 
 ---
 
-## Step 4 — Create vault folder structure
+## Phase 4 — Create vault structure via Obsidian CLI
+
+Use the Obsidian CLI for all vault operations from this point on. If the user has multiple vaults, add `vault="VAULT_NAME"` to each command.
+
+### 4a. Create folders by creating a placeholder in each, then removing it
+
+For each folder (00-Inbox, Notes, Atlas, Archive, Daily Notes/Templates), check if it exists and create it if not. The CLI creates parent folders when a file is created:
 
 ```bash
-mkdir -p "[VAULT]/00-Inbox" \
-  "[VAULT]/Notes" \
-  "[VAULT]/Atlas" \
-  "[VAULT]/Archive" \
-  "[VAULT]/Daily Notes/Templates"
+obsidian files path="Atlas/" 2>&1 | head -1
 ```
 
----
+If the folder doesn't exist, create a temporary file to establish it:
+```bash
+obsidian create name=".gitkeep" path="Atlas/"
+obsidian delete path="Atlas/.gitkeep.md"
+```
 
-## Step 5 — Seed vault files
+Do this for: `00-Inbox/`, `Notes/`, `Atlas/`, `Archive/`, `Daily Notes/Templates/`
+
+### 4b. Seed Atlas files
 
 Only create each file if it does not already exist. Check with:
 ```bash
-test -f "[VAULT]/Atlas/Work.md" && echo "exists" || echo "missing"
+obsidian read path="Atlas/Work.md" 2>&1 | head -1
 ```
 
-Create any missing files with the following contents:
+If a file doesn't exist, create it with `obsidian create`. Use the content templates below.
 
-### `Atlas/Work.md`
-
-```markdown
-# Work
-
-Map of all work achievement notes. Primary source for performance review summaries.
-
-## 2026
-
-### Q1 (Jan–Mar)
-
-### Q2 (Apr–Jun)
-
-### Q3 (Jul–Sep)
-
-### Q4 (Oct–Dec)
-
----
-
-## Tags
-#work/shipped — #work/unblocked — #work/led — #work/learned — #work/improved
+**Atlas/Work.md**:
+```bash
+obsidian create path="Atlas/Work.md" content="# Work\n\nMap of all work achievement notes. Primary source for performance review summaries.\n\n## $(date +%Y)\n\n### Q1 (Jan–Mar)\n\n### Q2 (Apr–Jun)\n\n### Q3 (Jul–Sep)\n\n### Q4 (Oct–Dec)\n\n---\n\n## Tags\n#work/shipped — #work/unblocked — #work/led — #work/learned — #work/improved"
 ```
 
-### `Atlas/Ideas.md`
-
-```markdown
-# Ideas
-
-Map of all idea notes. Reviewed weekly — stale inbox items get a decision.
-
-## Inbox (unactioned)
-
-## Active
-
-## Archived
+**Atlas/Ideas.md**:
+```bash
+obsidian create path="Atlas/Ideas.md" content="# Ideas\n\nMap of all idea notes. Reviewed weekly — stale inbox items get a decision.\n\n## Inbox (unactioned)\n\n## Active\n\n## Archived"
 ```
 
-### `Atlas/Actions.md`
-
-```markdown
-# Actions
-
-One-off tasks with deadlines. Reviewed daily — overdue items are flagged immediately.
-
-## Open
-
-## Done
+**Atlas/Actions.md**:
+```bash
+obsidian create path="Atlas/Actions.md" content="# Actions\n\nOne-off tasks with deadlines. Reviewed daily — overdue items are flagged immediately.\n\n## Open\n\n## Done"
 ```
 
-### `Atlas/Goals.md`
-
-```markdown
-# Goals
-
-- [[goal-health]] — physical health, weight, energy
-- [[goal-sleep]] — sleep quality and consistency
-- [[goal-fitness]] — exercise, strength, endurance
-- [[goal-diet]] — nutrition and eating habits
+**Atlas/Goals.md**:
+```bash
+obsidian create path="Atlas/Goals.md" content="# Goals\n\n- [[goal-health]] — physical health, weight, energy\n- [[goal-sleep]] — sleep quality and consistency\n- [[goal-fitness]] — exercise, strength, endurance\n- [[goal-diet]] — nutrition and eating habits"
 ```
 
-### `Atlas/Knowledge.md`
-
-```markdown
-# Knowledge
-
-## Engineering
-
-## Process & Craft
-
-## Personal
-
-## Reference
+**Atlas/Knowledge.md**:
+```bash
+obsidian create path="Atlas/Knowledge.md" content="# Knowledge\n\n## Engineering\n\n## Process & Craft\n\n## Personal\n\n## Reference"
 ```
 
-### `Notes/goal-health.md`, `Notes/goal-sleep.md`, `Notes/goal-fitness.md`, `Notes/goal-diet.md`
+### 4c. Seed goal notes
 
-Same template for each (substitute `health`/`sleep`/`fitness`/`diet` and `#goal/TAG`):
+For each of `goal-health`, `goal-sleep`, `goal-fitness`, `goal-diet`, check if it exists and create if not.
 
-```markdown
----
-type: goal
-persona: health
-tags:
-  - "#goal/health"
-last-reviewed: ""
-target: ""
-metric: ""
----
-
-# Health
-
-## Goal
-
-## Why It Matters
-
-## Current Approach
-
-## Recent Adjustments
-
-| Date | Change | Why |
-|------|--------|-----|
-
-## Commitments This Week
-
-- [ ]
-
-## Data Log
-
-| Date | Value | Notes |
-|------|-------|-------|
-
-## Review History
-
-| Date | Trend | Assessment |
-|------|-------|------------|
+```bash
+obsidian create path="Notes/goal-health.md" content="---\ntype: goal\npersona: health\ntags:\n  - \"#goal/health\"\nlast-reviewed: \"\"\ntarget: \"\"\nmetric: \"\"\n---\n\n# Health\n\n## Goal\n\n## Why It Matters\n\n## Current Approach\n\n## Recent Adjustments\n\n| Date | Change | Why |\n|------|--------|-----|\n\n## Commitments This Week\n\n- [ ]\n\n## Data Log\n\n| Date | Value | Notes |\n|------|-------|-------|\n\n## Review History\n\n| Date | Trend | Assessment |\n|------|-------|------------|"
 ```
 
-### `Daily Notes/Templates/Daily Note.md`
+Repeat for sleep, fitness, diet — substituting the persona name and tag in each.
 
-```markdown
----
-date: {{date:YYYY-MM-DD}}
-type: daily
----
+### 4d. Create the daily note template
 
-# {{date:dddd, MMMM D, YYYY}}
+```bash
+obsidian create path="Daily Notes/Templates/Daily Note.md" content="---\ndate: {{date:YYYY-MM-DD}}\ntype: daily\n---\n\n# {{date:dddd, MMMM D, YYYY}}\n\n## Focus\n> What's the one thing that makes today a success?\n\n## Tasks\n- [ ]\n\n## Morning Metrics\n> Log any tracked goal metrics here (e.g. weight, sleep hours)\n\n## Notes & Ideas\n> Anything worth capturing? Use /idea or /action if it needs tracking.\n\n## Work\n> Anything shipped or unblocked today? Use /log to record it.\n\n## End of Day\n- [ ] Anything worth logging with /log?\n- [ ] Any new ideas captured?\n- [ ] Inbox cleared or triaged?"
+```
 
-## Focus
-> What's the one thing that makes today a success?
+### 4e. Configure the daily note template setting
 
-## Tasks
-- [ ]
+This can't be done via the CLI. Write directly to the vault's Obsidian config:
 
-## Morning Metrics
-> Log any tracked goal metrics here (e.g. weight, sleep hours)
+```bash
+VAULT_PATH="[vault path from Q2]"
+```
 
-## Notes & Ideas
-> Anything worth capturing? Use /idea or /action if it needs tracking.
+Read the current `daily-notes.json`:
+```bash
+cat "$VAULT_PATH/.obsidian/daily-notes.json"
+```
 
-## Work
-> Anything shipped or unblocked today? Use /log to record it.
+Update it to include the template field. The file is JSON — merge in `"template": "Daily Notes/Templates/Daily Note"` while preserving existing fields (like `format`). Write the result back using the Write tool.
 
-## End of Day
-- [ ] Anything worth logging with /log?
-- [ ] Any new ideas captured?
-- [ ] Inbox cleared or triaged?
+### 4f. Install Dataview plugin
+
+```bash
+obsidian plugin:install id=dataview enable
 ```
 
 ---
 
-## Step 6 — Set up the cron job
+## Phase 5 — Set up the cron job
 
 Check if a claudia cron entry already exists:
 ```bash
 crontab -l 2>/dev/null | grep -c "claudia"
 ```
 
-If it already exists, show it and ask: "A claudia cron entry already exists. Replace it?"
+If it exists, show it and ask: "A claudia cron entry already exists. Replace it?"
 
-To install or replace:
+Install or replace:
 ```bash
 (crontab -l 2>/dev/null | grep -v "claudia"; echo "[MINUTE] [HOUR] * * [DAY] [PROJECT_PATH]/scripts/weekly-reminder.sh") | crontab -
 ```
 
-Confirm it was set:
+Verify:
 ```bash
 crontab -l | grep claudia
 ```
 
 ---
 
-## Step 7 — Summary
-
-Print a setup summary:
+## Phase 6 — Summary
 
 ```
 ## Setup complete
 
-**Project**: [claudia project path]
+**Name**: [name]
 **Vault**: [vault path]
 **Weekly reminder**: [day] at [time]
 
 ### Done automatically
-- [x] CLAUDE.md updated
-- [x] session-start.sh updated
-- [x] Vault folders created
-- [x] Atlas and Notes files seeded
+- [x] CLAUDE.md configured
+- [x] session-start.sh configured
+- [x] Vault folders created (via Obsidian CLI)
+- [x] Atlas, Goals, and Template files seeded (via Obsidian CLI)
+- [x] Daily note template configured
+- [x] Dataview plugin installed and enabled
 - [x] Weekly reminder cron job installed
 
-### Do these manually in Obsidian (takes ~2 minutes)
-
-1. **Enable the CLI**
-   Settings → General → Command line interface → Register CLI
-   Then test: run `obsidian --version` in your terminal
-
-2. **Set the daily note template**
-   Settings → Daily Notes → Template file → `Daily Notes/Templates/Daily Note`
-
-3. **Install the Dataview plugin** (recommended)
-   Settings → Community Plugins → Browse → Dataview → Install → Enable
-
 ### You're ready. Start with:
-   cd [claudia project path] && claude
+   cd [PROJECT_PATH] && claude
    /daily
 ```

@@ -30,27 +30,27 @@ The system uses [Claude Code](https://claude.ai/code) custom skills as the inter
 git clone https://github.com/iainmaitland88/claudia.git ~/Code/iainmaitland88/claudia
 ```
 
-### 2. Run the setup skill
+### 2. Install Obsidian and enable the CLI
+
+Download and install [Obsidian](https://obsidian.md) (v1.12.4 or later), open a vault, then enable the CLI:
+
+**Settings → General → Command line interface → Register CLI**
+
+### 3. Run the setup skill
 
 ```bash
 cd ~/Code/iainmaitland88/claudia && claude
 /setup
 ```
 
-This walks you through four questions (your name, vault path, weekly review schedule, and work role), then automatically:
+This walks you through four questions (name, vault, weekly review schedule, role), then uses the Obsidian CLI to automatically:
 
-- Updates all config files with your paths
-- Creates the vault folder structure
-- Seeds all required Atlas and Notes files
-- Installs the weekly reminder cron job
-
-### 3. Complete the three manual steps in Obsidian
-
-`/setup` will tell you these at the end, but here they are for reference:
-
-1. **Enable the CLI** — Settings → General → Command line interface → Register CLI
-2. **Set the daily note template** — Settings → Daily Notes → Template file → `Daily Notes/Templates/Daily Note`
-3. **Install Dataview** (recommended) — Settings → Community Plugins → Browse → Dataview → Install → Enable
+- Update all config files with your paths
+- Create the vault folder structure
+- Seed all Atlas, Goal, and Template files
+- Configure the daily note template
+- Install and enable the Dataview plugin
+- Install the weekly reminder cron job
 
 ### 4. First run
 
