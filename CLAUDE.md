@@ -50,7 +50,7 @@ Goals: #goal/health #goal/sleep #goal/fitness #goal/diet
 Status: #status/inbox #status/active #status/done #status/stale
 
 ## Urgency Thresholds
-- Idea with #status/inbox older than 14 days → flag
+- Idea with #status/inbox older than 7 days → flag
 - Work note not created in 3+ working days → flag
 - No weekly review in 10+ days → flag
 - Goal note not updated in 30+ days → flag

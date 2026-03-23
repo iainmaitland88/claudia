@@ -24,7 +24,7 @@ Run a weekly review. Today: !`date +%Y-%m-%d`. Current week: !`date +%Y-W%V`.
    ```
    Parse all open items. Flag overdue (past due date) and due within 7 days.
 
-4. **Find stale inbox items** (ideas > 14 days old):
+4. **Find stale inbox items** (ideas > 7 days old):
    ```bash
    obsidian read file="Atlas/Ideas"
    ```
@@ -55,7 +55,7 @@ Run a weekly review. Today: !`date +%Y-%m-%d`. Current week: !`date +%Y-W%V`.
 **Overdue:** [list with days past due, or "None"]
 **Due this week:** [list or "None"]
 
-### Inbox Triage (ideas > 14 days old)
+### Inbox Triage (ideas > 7 days old)
 For each stale idea:
 - [[note-name]] — added [N] days ago — Keep & act / Archive?
 

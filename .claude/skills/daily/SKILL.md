@@ -28,7 +28,7 @@ Run a morning planning session. Today's date: !`date +%Y-%m-%d`.
    ```bash
    obsidian read file="Atlas/Ideas"
    ```
-   Find all lines under `## Inbox (unactioned)`. Compare the `Added:` date to today — flag anything older than 14 days.
+   Find all lines under `## Inbox (unactioned)`. Compare the `Added:` date to today — flag anything older than 7 days.
 
 5. **Check Work atlas** for last entry date:
    ```bash
@@ -63,7 +63,7 @@ Run a morning planning session. Today's date: !`date +%Y-%m-%d`.
 [Unchecked tasks from yesterday's daily note, or "None found"]
 
 **Inbox signals**
-- Ideas: [N] in inbox, [N] stale (>14d)
+- Ideas: [N] in inbox, [N] stale (>7d)
 - Last work note: [date] ([ok / FLAG: X days ago])
 - Last weekly review: [date] ([ok / FLAG: overdue])
 
