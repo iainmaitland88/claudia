@@ -46,10 +46,12 @@ Input: $ARGUMENTS
    ```
    If any project notes seem topically related to this achievement, ask:
    "Is this related to [[project-name]]?"
-   If yes, append a back-reference:
-   ```bash
-   obsidian append file="[project-slug]" content="- [[date-slug]] | [date]"
-   ```
+   If yes:
+   - Append a back-reference:
+     ```bash
+     obsidian append file="[project-slug]" content="- [[date-slug]] | [date]"
+     ```
+   - Read the project note and check off any `## Steps` items that this achievement completes (change `- [ ]` to `- [x]`).
 
 6. Append to the Work atlas:
    ```bash
