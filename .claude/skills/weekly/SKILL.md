@@ -1,0 +1,86 @@
+---
+name: weekly
+description: Weekly review - flags forgotten ideas/tasks, summarises the week, checks goals
+---
+
+Run a weekly review. Today: !`date +%Y-%m-%d`. Current week: !`date +%Y-W%V`.
+
+## Steps
+
+1. **Read daily notes from the past 7 days**:
+   ```bash
+   obsidian search query="type:daily after:[7 days ago]" --output paths
+   ```
+   Read each one found.
+
+2. **Read the Work atlas** for entries added this week:
+   ```bash
+   obsidian read file="Atlas/Work"
+   ```
+
+3. **Read Actions** for overdue and upcoming items:
+   ```bash
+   obsidian read file="Atlas/Actions"
+   ```
+   Parse all open items. Flag overdue (past due date) and due within 7 days.
+
+4. **Find stale inbox items** (ideas > 14 days old):
+   ```bash
+   obsidian read file="Atlas/Ideas"
+   ```
+   Check the `## Inbox (unactioned)` section. For each linked note, read it and check its `date:` frontmatter.
+
+5. **Read all goal notes**:
+   ```bash
+   obsidian read file="Notes/goal-health"
+   obsidian read file="Notes/goal-sleep"
+   obsidian read file="Notes/goal-fitness"
+   obsidian read file="Notes/goal-diet"
+   ```
+
+6. **Check last weekly review**:
+   ```bash
+   obsidian search query="type:weekly-review" --output json
+   ```
+
+## Output Format
+
+```
+## Weekly Review — [week]
+
+### What Got Done This Week
+[Real achievements from work notes and daily notes — specific, not vague]
+
+### Actions
+**Overdue:** [list with days past due, or "None"]
+**Due this week:** [list or "None"]
+
+### Inbox Triage (ideas > 14 days old)
+For each stale idea:
+- [[note-name]] — added [N] days ago — Keep & act / Archive?
+
+### Goals
+- Health: last updated [date] — [one-line status from data log]
+- Sleep: last updated [date] — [one-line status]
+- Fitness: last updated [date] — [one-line status]
+- Diet: last updated [date] — [one-line status]
+
+### Flags
+[Anything else that needs attention — no weekly review in 10+ days, work log gap, etc.]
+```
+
+## After Showing
+
+1. For each stale idea, ask: "Keep and assign a next action, or archive?"
+   - If keeping: update the note's tag from `#status/inbox` to `#status/active` using:
+     ```bash
+     obsidian properties:set file="[note]" key="tags" value="..."
+     ```
+   - If archiving: move to Archive/ and update Atlas/Ideas.md
+
+2. Ask: "Save this as a weekly review note?"
+   If yes, create:
+   ```bash
+   obsidian create name="weekly-[YYYY-WNN]" path="Notes/" content="[full review output]"
+   ```
+   Set `type: weekly-review` in frontmatter.

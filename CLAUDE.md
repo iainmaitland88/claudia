@@ -1,0 +1,60 @@
+# Second Brain — Personal Knowledge Base
+
+This system is Iain's PKB: a growing, connected record of his work, ideas, knowledge, and goals.
+Run `claude` from this directory to access it.
+
+## Vault
+`/Users/iain.maitland/Documents/Obsidian Vault/`
+
+## Who
+Iain Maitland — software engineer. Disorganised but thoughtful.
+Needs a system that captures fast and recalls richly.
+
+## Obsidian CLI
+All skills use the `obsidian` CLI (requires Obsidian to be running).
+Enable once in Obsidian: Settings → General → Command line interface → Register CLI.
+
+Key commands used in skills:
+- `obsidian read file="Name"` — read a note by name
+- `obsidian read path="Notes/2026-03-23-slug.md"` — read by exact path
+- `obsidian create name="Title" path="Notes/" content="..."` — create a new note
+- `obsidian append file="Name" content="text"` — append a line to a note
+- `obsidian prepend file="Name" content="text"` — prepend a line to a note
+- `obsidian daily:read` — read today's daily note
+- `obsidian daily:append content="text"` — append to today's daily note
+- `obsidian daily:path` — get today's daily note path
+- `obsidian search query="tag:#status/inbox"` — search by tag
+- `obsidian search query="tag:#work/shipped after:2026-01-01"` — search with date filter
+- `obsidian properties:set file="Name" key="last-reviewed" value="2026-03-23"` — update frontmatter
+- `obsidian files path="Notes/"` — list files in a folder
+
+Note: Skills fall back to direct Read/Edit file tools if the CLI returns an error (e.g., Obsidian not running).
+
+## Key Paths
+- Daily notes: `2026/MM/YYYY-MM-DD.md`
+- All notes: `Notes/` (flat)
+- Raw captures: `00-Inbox/`
+- MOC hubs: `Atlas/Work.md`, `Atlas/Ideas.md`, `Atlas/Goals.md`, `Atlas/Knowledge.md`, `Atlas/Actions.md`
+- Goal notes: `Notes/goal-health.md`, `Notes/goal-sleep.md`, `Notes/goal-fitness.md`, `Notes/goal-diet.md`
+- Weekly reviews saved as: `Notes/weekly-YYYY-WNN.md`
+
+## Note Naming
+New notes: `Notes/YYYY-MM-DD-short-slug.md`
+Goal notes: `Notes/goal-[persona].md` (persistent, updated in place)
+MOC notes: `Atlas/[Name].md` (persistent, updated in place)
+
+## Tagging
+Work: #work/shipped #work/unblocked #work/led #work/learned #work/improved
+Ideas: #idea/work #idea/personal #idea/product #idea/process
+Goals: #goal/health #goal/sleep #goal/fitness #goal/diet
+Status: #status/inbox #status/active #status/done #status/stale
+
+## Urgency Thresholds
+- Idea with #status/inbox older than 14 days → flag
+- Work note not created in 3+ working days → flag
+- No weekly review in 10+ days → flag
+- Goal note not updated in 30+ days → flag
+- Action item overdue → flag immediately
+
+## Tone
+Direct. No fluff. No motivational filler. Flag what matters.
