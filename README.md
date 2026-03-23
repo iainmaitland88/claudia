@@ -32,92 +32,32 @@ git clone https://github.com/iainmaitland88/claudia.git ~/Code/iainmaitland88/cl
 
 ### 2. Run the setup skill
 
-The `/setup` skill handles everything — path configuration, vault structure, seeding files, and installing the cron reminder.
-
 ```bash
 cd ~/Code/iainmaitland88/claudia && claude
 /setup
 ```
 
-It will ask you four questions (name, vault path, weekly review schedule, work role) and then configure everything automatically. Skip to [step 6](#6-enable-the-obsidian-cli) when it's done.
+This walks you through four questions (your name, vault path, weekly review schedule, and work role), then automatically:
 
----
+- Updates all config files with your paths
+- Creates the vault folder structure
+- Seeds all required Atlas and Notes files
+- Installs the weekly reminder cron job
 
-**Or configure manually** if you prefer:
+### 3. Complete the three manual steps in Obsidian
 
-**`CLAUDE.md`** — change the `Vault` path:
-```
-/Users/YOUR_USERNAME/Documents/Obsidian Vault/
-```
+`/setup` will tell you these at the end, but here they are for reference:
 
-**`.claude/hooks/session-start.sh`** — change the `VAULT` variable:
-```bash
-VAULT="/Users/YOUR_USERNAME/Documents/Obsidian Vault"
-```
+1. **Enable the CLI** — Settings → General → Command line interface → Register CLI
+2. **Set the daily note template** — Settings → Daily Notes → Template file → `Daily Notes/Templates/Daily Note`
+3. **Install Dataview** (recommended) — Settings → Community Plugins → Browse → Dataview → Install → Enable
 
-**`scripts/weekly-reminder.sh`** — change the path in the notification message.
-
-### 3. Make scripts executable
-
-```bash
-chmod +x .claude/hooks/session-start.sh scripts/weekly-reminder.sh
-```
-
-### 4. Create the vault folder structure
-
-In Obsidian (or via terminal), create these folders inside your vault:
-
-```
-00-Inbox/
-Notes/
-Atlas/
-Archive/
-Daily Notes/Templates/
-```
-
-### 5. Seed the Atlas and Notes files
-
-Copy these files into your vault from the `vault-seed/` directory (see [Vault seed files](#vault-seed-files) below), or create them manually using the templates in this README.
-
-### 6. Enable the Obsidian CLI
-
-In Obsidian: **Settings → General → Command line interface → Register CLI**
-
-Test it works:
-```bash
-obsidian --version
-```
-
-### 7. Point daily notes to the template
-
-In Obsidian: **Settings → Daily Notes → Template file location** → `Daily Notes/Templates/Daily Note`
-
-### 8. Install the Dataview plugin (recommended)
-
-In Obsidian: **Settings → Community Plugins → Browse → Dataview → Install → Enable**
-
-This powers future dashboard queries across your vault.
-
-### 9. Add the weekly review cron reminder
-
-```bash
-crontab -e
-```
-
-Add:
-```
-30 16 * * 5 /Users/YOUR_USERNAME/Code/iainmaitland88/claudia/scripts/weekly-reminder.sh
-```
-
-This sends a macOS notification every Friday at 4:30pm.
-
-### 10. First run
+### 4. First run
 
 ```bash
 cd ~/Code/iainmaitland88/claudia && claude
+/daily
 ```
-
-Type `/daily` to run your first morning briefing.
 
 ---
 
@@ -338,158 +278,6 @@ The `Atlas/` folder holds **Maps of Content (MOCs)** — index notes that link t
 | Friday afternoon | `/weekly` | ~10 min |
 | Goal check-in | `/review-goals` | ~5 min |
 | Perf review season | "Summarise my work in Q1" | 0 prep — already logged |
-
----
-
-## Vault seed files
-
-These files need to exist in your vault before the skills work. Create them with the following content:
-
-### `Atlas/Work.md`
-
-```markdown
-# Work
-
-Map of all work achievement notes. Primary source for performance review summaries.
-
-## 2026
-
-### Q1 (Jan–Mar)
-
-### Q2 (Apr–Jun)
-
-### Q3 (Jul–Sep)
-
-### Q4 (Oct–Dec)
-
----
-
-## Tags
-#work/shipped — #work/unblocked — #work/led — #work/learned — #work/improved
-```
-
-### `Atlas/Ideas.md`
-
-```markdown
-# Ideas
-
-Map of all idea notes. Reviewed weekly — stale inbox items get a decision.
-
-## Inbox (unactioned)
-
-## Active
-
-## Archived
-```
-
-### `Atlas/Actions.md`
-
-```markdown
-# Actions
-
-One-off tasks with deadlines. Reviewed daily — overdue items are flagged immediately.
-
-## Open
-
-## Done
-```
-
-### `Atlas/Goals.md`
-
-```markdown
-# Goals
-
-- [[goal-health]] — physical health, weight, energy
-- [[goal-sleep]] — sleep quality and consistency
-- [[goal-fitness]] — exercise, strength, endurance
-- [[goal-diet]] — nutrition and eating habits
-```
-
-### `Atlas/Knowledge.md`
-
-```markdown
-# Knowledge
-
-## Engineering
-
-## Process & Craft
-
-## Personal
-
-## Reference
-```
-
-### `Notes/goal-health.md` (repeat for `goal-sleep`, `goal-fitness`, `goal-diet`)
-
-```markdown
----
-type: goal
-persona: health
-tags:
-  - "#goal/health"
-last-reviewed: ""
-target: ""
-metric: ""
----
-
-# Health
-
-## Goal
-
-## Why It Matters
-
-## Current Approach
-
-## Recent Adjustments
-
-| Date | Change | Why |
-|------|--------|-----|
-
-## Commitments This Week
-
-- [ ]
-
-## Data Log
-
-| Date | Value | Notes |
-|------|-------|-------|
-
-## Review History
-
-| Date | Trend | Assessment |
-|------|-------|------------|
-```
-
-### `Daily Notes/Templates/Daily Note.md`
-
-```markdown
----
-date: {{date:YYYY-MM-DD}}
-type: daily
----
-
-# {{date:dddd, MMMM D, YYYY}}
-
-## Focus
-> What's the one thing that makes today a success?
-
-## Tasks
-- [ ]
-
-## Morning Metrics
-> Log any tracked goal metrics here (e.g. weight, sleep hours)
-
-## Notes & Ideas
-> Anything worth capturing? Use /idea or /action if it needs tracking.
-
-## Work
-> Anything shipped or unblocked today? Use /log to record it.
-
-## End of Day
-- [ ] Anything worth logging with /log?
-- [ ] Any new ideas captured?
-- [ ] Inbox cleared or triaged?
-```
 
 ---
 
