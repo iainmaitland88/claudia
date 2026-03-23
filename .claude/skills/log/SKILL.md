@@ -42,7 +42,7 @@ Input: $ARGUMENTS
 
 5. Check for related active projects:
    ```bash
-   obsidian search query="type:project tag:#status/active" --output paths
+   obsidian search query="type:project tag:#status/refined" --output paths
    ```
    If any project notes seem topically related to this achievement, ask:
    "Is this related to [[project-name]]?"

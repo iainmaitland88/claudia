@@ -24,11 +24,11 @@ Run a morning planning session. Today's date: !`date +%Y-%m-%d`.
    ```
    Parse all `## Open` lines. Flag anything with `Due:` date on or before today as OVERDUE. Flag anything due within 7 days as "Coming up".
 
-4. **Check Ideas inbox** for stale items:
+4. **Check unrefined ideas** for stale items:
    ```bash
    obsidian read file="Atlas/Ideas"
    ```
-   Find all lines under `## Inbox (unactioned)`. Compare the `Added:` date to today — flag anything older than 7 days.
+   Find all lines under `## Unrefined`. Compare the `Added:` date to today — flag anything older than 7 days.
 
 5. **Check Work atlas** for last entry date:
    ```bash
@@ -62,8 +62,8 @@ Run a morning planning session. Today's date: !`date +%Y-%m-%d`.
 **Yesterday's loose ends**
 [Unchecked tasks from yesterday's daily note, or "None found"]
 
-**Inbox signals**
-- Ideas: [N] in inbox, [N] stale (>7d)
+**Idea signals**
+- Ideas: [N] unrefined, [N] stale (>7d)
 - Last work note: [date] ([ok / FLAG: X days ago])
 - Last weekly review: [date] ([ok / FLAG: overdue])
 

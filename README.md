@@ -9,7 +9,7 @@ A personal knowledge base (PKB) built on Claude Code and Obsidian. Not a product
 ## What it does
 
 - **Logs work achievements** as individual notes, so when performance review season arrives your highlight reel is already written
-- **Captures ideas** before they're forgotten, tracks them from inbox to active project to shipped
+- **Captures ideas** before they're forgotten, tracks them from unrefined to active project to shipped
 - **Plans your day** each morning with a briefing that flags what's urgent, what's stale, and what needs your attention
 - **Reviews your week** every Friday — surfaces forgotten actions, stale ideas, and checks in on long-term goals
 - **Tracks long-term goals** with structured data logging and trend analysis (weight loss, sleep, fitness, diet, anything with a measurable metric)
@@ -85,7 +85,7 @@ Run this once after cloning. Walks you through a short questionnaire, then autom
 Reads your vault and produces a focused morning briefing:
 
 - Overdue and upcoming actions (from `Atlas/Actions.md`)
-- Stale ideas in the inbox (>14 days without a decision)
+- Stale unrefined ideas (>7 days without a decision)
 - Yesterday's unchecked tasks
 - Signals: last work note date, last weekly review date
 - Suggested focus for the day
@@ -120,7 +120,7 @@ Each entry gets a `#work/` tag automatically:
 
 ### `/idea` — Idea capture
 
-Creates a linked note for an idea and adds it to `Atlas/Ideas.md` under "Inbox". Ideas are reviewed weekly — stale ones (>14 days) get a decision: keep and act, or archive.
+Creates a linked note for an idea and adds it to `Atlas/Ideas.md` under "Unrefined". Ideas are reviewed weekly — stale ones (>7 days) get a decision: refine and act, or archive.
 
 ```
 /idea Shared codegen pipeline across front-end repos — write a Notion doc and get Dave's sign-off
@@ -148,21 +148,21 @@ To expand a simple line item into a full note later: "expand the driving license
 
 ---
 
-### `/promote` — Idea to project
+### `/refine` — Idea to project
 
-Promotes an inbox idea into an active project with a step-by-step checklist. Subsequent `/log` entries can be linked back to the project, building a thread of progress.
+Refines an unrefined idea into an active project with a step-by-step checklist. Subsequent `/log` entries can be linked back to the project, building a thread of progress.
 
 ```
-/promote type generation
+/refine type generation
 ```
 
-Claude finds the idea note, shows it to you, asks for the steps, and converts it in place. The idea moves from "Inbox" to "Active" in `Atlas/Ideas.md`.
+Claude finds the idea note, shows it to you, asks for the steps, and converts it in place. The idea moves from "Unrefined" to "Active" in `Atlas/Ideas.md`.
 
 **Full lifecycle example:**
 
 ```
 /idea Shared codegen pipeline for front-end repos          ← captured
-/promote shared codegen                                     ← becomes a project with steps
+/refine shared codegen                                      ← becomes a project with steps
 /log Drafted the Notion doc, shared with Dave for review    ← linked to the project
 /log Dave signed off on the proposal                        ← linked to the project
 /log Shipped v1 of the CLI tool, added to monolith          ← linked to the project
@@ -178,7 +178,7 @@ Meant for Friday afternoons. Reads your whole week and surfaces what needs atten
 
 - What got done (from work notes and daily notes)
 - Overdue actions
-- Stale inbox ideas that need a decision
+- Stale unrefined ideas that need a decision
 - Goal check-in across all four personas
 
 Claude walks you through triaging stale ideas one by one, then offers to save the review as a note.
@@ -214,7 +214,6 @@ To log a data point mid-conversation: "log my weight as 84.2kg" — Claude appen
 
 ```
 Obsidian Vault/
-├── Inbox/                  ← Raw, unprocessed captures
 ├── Atlas/
 │   ├── Work.md             ← Hub for all work achievement notes
 │   ├── Ideas.md            ← Hub for all idea and project notes
@@ -259,8 +258,9 @@ The `Atlas/` folder holds **Maps of Content (MOCs)** — index notes that link t
 #goal/fitness
 #goal/diet
 
-#status/inbox       raw, unprocessed — needs a decision
-#status/active      being worked on
+#status/unrefined   raw idea — needs refining
+#status/refined     idea refined into an active project
+#status/active      being worked on (tasks)
 #status/done        complete
 #status/stale       needs review
 
@@ -277,7 +277,7 @@ The `Atlas/` folder holds **Maps of Content (MOCs)** — index notes that link t
 | Shipped something | `/log what you did and why it mattered` | 10 sec |
 | Idea appears | `/idea the idea` | 5 sec |
 | Task to remember | `/task what to do by when` | 5 sec |
-| Idea becomes real | `/promote idea name` | 2 min |
+| Idea becomes real | `/refine idea name` | 2 min |
 | Friday afternoon | `/weekly` | ~10 min |
 | Goal check-in | `/review-goals` | ~5 min |
 | Perf review season | "Summarise my work in Q1" | 0 prep — already logged |
@@ -314,7 +314,7 @@ claudia/
 │       ├── log/SKILL.md
 │       ├── idea/SKILL.md
 │       ├── task/SKILL.md
-│       ├── promote/SKILL.md
+│       ├── refine/SKILL.md
 │       └── review-goals/SKILL.md
 └── scripts/
     └── weekly-reminder.sh             ← macOS notification via cron

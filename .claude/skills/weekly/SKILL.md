@@ -24,11 +24,11 @@ Run a weekly review. Today: !`date +%Y-%m-%d`. Current week: !`date +%Y-W%V`.
    ```
    Parse all open items. Flag overdue (past due date) and due within 7 days.
 
-4. **Find stale inbox items** (ideas > 7 days old):
+4. **Find stale unrefined ideas** (> 7 days old):
    ```bash
    obsidian read file="Atlas/Ideas"
    ```
-   Check the `## Inbox (unactioned)` section. For each linked note, read it and check its `date:` frontmatter.
+   Check the `## Unrefined` section. For each linked note, read it and check its `date:` frontmatter.
 
 5. **Read all goal notes**:
    ```bash
@@ -55,7 +55,7 @@ Run a weekly review. Today: !`date +%Y-%m-%d`. Current week: !`date +%Y-W%V`.
 **Overdue:** [list with days past due, or "None"]
 **Due this week:** [list or "None"]
 
-### Inbox Triage (ideas > 7 days old)
+### Unrefined Ideas (> 7 days old)
 For each stale idea:
 - [[note-name]] — added [N] days ago — Keep & act / Archive?
 
@@ -72,7 +72,7 @@ For each stale idea:
 ## After Showing
 
 1. For each stale idea, ask: "Keep and assign a next action, or archive?"
-   - If keeping: update the note's tag from `#status/inbox` to `#status/active` using:
+   - If keeping: update the note's tag from `#status/unrefined` to `#status/refined` using:
      ```bash
      obsidian properties:set file="[note]" key="tags" value="..."
      ```

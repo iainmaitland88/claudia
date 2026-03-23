@@ -1,10 +1,10 @@
 ---
-name: promote
-description: Promote an inbox idea to an active project with a checklist of steps
+name: refine
+description: Refine an idea into an active project with a checklist of steps
 argument-hint: <idea name or partial title>
 ---
 
-Promote an idea to an active project. Today: !`date +%Y-%m-%d`.
+Refine an idea into an active project. Today: !`date +%Y-%m-%d`.
 
 Input: $ARGUMENTS
 
@@ -12,20 +12,20 @@ Input: $ARGUMENTS
 
 1. Find the idea note:
    ```bash
-   obsidian search query="type:idea tag:#status/inbox" --output paths
+   obsidian search query="type:idea tag:#status/unrefined" --output paths
    ```
    If $ARGUMENTS is provided, filter results by name matching $ARGUMENTS.
-   If multiple matches or no $ARGUMENTS, list them and ask: "Which idea do you want to promote?"
+   If multiple matches or no $ARGUMENTS, list them and ask: "Which idea do you want to refine?"
 
 2. Read the matching note:
    ```bash
    obsidian read file="[note-name]"
    ```
-   Show the current note content and confirm: "Is this the idea you want to promote?"
+   Show the current note content and confirm: "Is this the idea you want to refine?"
 
 3. Ask: "What are the steps to complete this? List them one per line."
 
-4. Update the note — change `type: idea` → `type: project`, `#status/inbox` → `#status/active`, and add sections:
+4. Update the note — change `type: idea` → `type: project`, `#status/unrefined` → `#status/refined`, and add sections:
    ```bash
    obsidian properties:set file="[note-name]" key="type" value="project"
    ```
@@ -41,7 +41,7 @@ Input: $ARGUMENTS
    "
    ```
 
-5. Update Atlas/Ideas.md — move the link from `## Inbox (unactioned)` to `## Active`:
+5. Update Atlas/Ideas.md — move the link from `## Unrefined` to `## Active`:
    Read the file, edit the line, write it back.
 
 6. Confirm: "[[note-name]] is now an active project with [N] steps."

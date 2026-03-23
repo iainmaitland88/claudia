@@ -117,11 +117,11 @@ chmod +x .claude/hooks/session-start.sh scripts/weekly-reminder.sh
 
 Use the Obsidian CLI for all vault operations from this point on. If the user has multiple vaults, add `vault="VAULT_NAME"` to each command.
 
-Folders are created automatically when files are created via `obsidian create path=`. Most folders will be created when seeding files below. For empty folders (`Inbox/` and `Archive/`), create them via the filesystem:
+Folders are created automatically when files are created via `obsidian create path=`. Most folders will be created when seeding files below. For the empty `Archive/` folder, create it via the filesystem:
 
 ```bash
 VAULT_PATH="[vault path from Q2]"
-mkdir -p "$VAULT_PATH/Inbox" "$VAULT_PATH/Archive"
+mkdir -p "$VAULT_PATH/Archive"
 ```
 
 ### 4a. Seed Atlas files
@@ -140,7 +140,7 @@ obsidian create path="Atlas/Work.md" content="# Work\n\nMap of all work achievem
 
 **Atlas/Ideas.md**:
 ```bash
-obsidian create path="Atlas/Ideas.md" content="# Ideas\n\nMap of all idea notes. Reviewed weekly — stale inbox items get a decision.\n\n## Inbox (unactioned)\n\n## Active\n\n## Archived"
+obsidian create path="Atlas/Ideas.md" content="# Ideas\n\nMap of all idea notes. Reviewed weekly — stale unrefined ideas get a decision.\n\n## Unrefined\n\n## Active\n\n## Archived"
 ```
 
 **Atlas/Actions.md**:
@@ -171,7 +171,7 @@ Repeat for sleep, fitness, diet — substituting the persona name and tag in eac
 ### 4d. Create the daily note template
 
 ```bash
-obsidian create path="Daily Notes/Templates/Daily Note.md" content="---\ndate: {{date:YYYY-MM-DD}}\ntype: daily\n---\n\n# {{date:dddd, MMMM D, YYYY}}\n\n## Focus\n> What's the one thing that makes today a success?\n\n## Tasks\n- [ ]\n\n## Morning Metrics\n> Log any tracked goal metrics here (e.g. weight, sleep hours)\n\n## Notes & Ideas\n> Anything worth capturing? Use /idea or /task if it needs tracking.\n\n## Work\n> Anything shipped or unblocked today? Use /log to record it.\n\n## End of Day\n- [ ] Anything worth logging with /log?\n- [ ] Any new ideas captured?\n- [ ] Inbox cleared or triaged?"
+obsidian create path="Daily Notes/Templates/Daily Note.md" content="---\ndate: {{date:YYYY-MM-DD}}\ntype: daily\n---\n\n# {{date:dddd, MMMM D, YYYY}}\n\n## Focus\n> What's the one thing that makes today a success?\n\n## Tasks\n- [ ]\n\n## Morning Metrics\n> Log any tracked goal metrics here (e.g. weight, sleep hours)\n\n## Notes & Ideas\n> Anything worth capturing? Use /idea or /task if it needs tracking.\n\n## Work\n> Anything shipped or unblocked today? Use /log to record it.\n\n## End of Day\n- [ ] Anything worth logging with /log?\n- [ ] Any new ideas captured?\n- [ ] Ideas captured or refined?"
 ```
 
 ### 4e. Configure the daily note template setting

@@ -25,7 +25,7 @@ Input: $ARGUMENTS
    obsidian create name="[date]-[slug]" path="Notes/" content="---
    date: [date]
    type: idea
-   tags: [[#idea/TAG], [#status/inbox]]
+   tags: [[#idea/TAG], [#status/unrefined]]
    ---
 
    # [Idea title]
@@ -38,11 +38,11 @@ Input: $ARGUMENTS
    "
    ```
 
-5. Append to the Ideas atlas under `## Inbox (unactioned)`:
+5. Append to the Ideas atlas under `## Unrefined`:
    ```bash
    obsidian append file="Atlas/Ideas" content="- [[date-slug]] | Added: [date]"
    ```
 
-6. Confirm: "Captured as [[date-slug]]. You have [N] ideas in the inbox."
+6. Confirm: "Captured as [[date-slug]]. You have [N] unrefined ideas."
 
 Do not elaborate, categorise further, or suggest next steps unless asked. Just capture it fast.
