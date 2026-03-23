@@ -20,7 +20,6 @@ The system uses [Claude Code](https://claude.ai/code) custom skills as the inter
 
 ## Requirements
 
-- macOS
 - [Claude Code](https://claude.ai/code) installed
 - [Obsidian](https://obsidian.md) v1.12.4 or later (for the built-in CLI)
 
