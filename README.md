@@ -1,4 +1,8 @@
-# claudia
+<p align="center">
+  <img src="claudia.png" alt="Claudia" width="600" />
+</p>
+
+# Claudia
 
 A personal knowledge base (PKB) built on Claude Code and Obsidian. Not a productivity app — a growing, connected record of your work, ideas, knowledge, and goals that compounds in value over time.
 
