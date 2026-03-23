@@ -31,10 +31,6 @@ Input: $ARGUMENTS
    # [Idea title]
 
    [The idea as described — keep it as stated, don't over-elaborate]
-
-   **Why it matters**:
-
-   **Next task**:
    "
    ```
 
