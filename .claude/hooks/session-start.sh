@@ -8,7 +8,7 @@ YEAR=$(date +%Y)
 MONTH=$(date +%m)
 DAY_FILE="$VAULT/Daily Notes/$YEAR/$MONTH/$TODAY.md"
 
-INBOX_COUNT=$(find "$VAULT/00-Inbox" -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
+INBOX_COUNT=$(find "$VAULT/Inbox" -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
 TODAY_NOTES=$(find "$VAULT/Notes" -name "$TODAY-*.md" 2>/dev/null | wc -l | tr -d ' ')
 NOTE_STATUS=$([ -f "$DAY_FILE" ] && echo "exists" || echo "not created yet")
 

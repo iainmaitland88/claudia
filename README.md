@@ -214,7 +214,7 @@ To log a data point mid-conversation: "log my weight as 84.2kg" — Claude appen
 
 ```
 Obsidian Vault/
-├── 00-Inbox/               ← Raw, unprocessed captures
+├── Inbox/                  ← Raw, unprocessed captures
 ├── Atlas/
 │   ├── Work.md             ← Hub for all work achievement notes
 │   ├── Ideas.md            ← Hub for all idea and project notes

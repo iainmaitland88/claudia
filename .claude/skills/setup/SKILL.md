@@ -117,11 +117,11 @@ chmod +x .claude/hooks/session-start.sh scripts/weekly-reminder.sh
 
 Use the Obsidian CLI for all vault operations from this point on. If the user has multiple vaults, add `vault="VAULT_NAME"` to each command.
 
-Folders are created automatically when files are created via `obsidian create path=`. Most folders will be created when seeding files below. For empty folders (`00-Inbox/` and `Archive/`), create them via the filesystem:
+Folders are created automatically when files are created via `obsidian create path=`. Most folders will be created when seeding files below. For empty folders (`Inbox/` and `Archive/`), create them via the filesystem:
 
 ```bash
 VAULT_PATH="[vault path from Q2]"
-mkdir -p "$VAULT_PATH/00-Inbox" "$VAULT_PATH/Archive"
+mkdir -p "$VAULT_PATH/Inbox" "$VAULT_PATH/Archive"
 ```
 
 ### 4a. Seed Atlas files

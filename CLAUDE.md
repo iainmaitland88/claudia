@@ -33,7 +33,7 @@ Note: Skills fall back to direct Read/Edit file tools if the CLI returns an erro
 ## Key Paths
 - Daily notes: `2026/MM/YYYY-MM-DD.md`
 - All notes: `Notes/` (flat)
-- Raw captures: `00-Inbox/`
+- Raw captures: `Inbox/`
 - MOC hubs: `Atlas/Work.md`, `Atlas/Ideas.md`, `Atlas/Goals.md`, `Atlas/Knowledge.md`, `Atlas/Actions.md`
 - Goal notes: `Notes/goal-health.md`, `Notes/goal-sleep.md`, `Notes/goal-fitness.md`, `Notes/goal-diet.md`
 - Weekly reviews saved as: `Notes/weekly-YYYY-WNN.md`
