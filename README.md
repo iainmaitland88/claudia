@@ -11,6 +11,7 @@ A personal knowledge base (PKB) built on Claude Code and Obsidian. Not a product
 - **Logs work achievements** as individual notes, so when performance review season arrives your highlight reel is already written
 - **Captures ideas** before they're forgotten, tracks them from unrefined to active project to shipped
 - **Plans your day** each morning with a briefing that flags what's urgent, what's stale, and what needs your attention
+- **Checks you in** at end of day — pulls your GitHub PRs and creates log entries for anything you missed
 - **Reviews your week** every Friday — surfaces forgotten tasks and stale ideas
 
 The system uses [Claude Code](https://claude.ai/code) custom skills as the interface and an [Obsidian](https://obsidian.md) vault as the storage layer. Claude reads and writes vault notes via the Obsidian CLI. Obsidian renders the graph, backlinks, and Dataview queries.
@@ -45,14 +46,14 @@ cd ~/Code/iainmaitland88/claudia && claude
 /setup
 ```
 
-This walks you through four questions (name, vault, weekly review schedule, role), then uses the Obsidian CLI to automatically:
+This walks you through five questions (name, vault, check-in time, weekly review schedule, role), then uses the Obsidian CLI to automatically:
 
 - Update all config files with your paths
 - Create the vault folder structure
 - Seed all Atlas and Template files
 - Configure the daily note template
 - Install and enable the Dataview plugin
-- Install the weekly reminder cron job
+- Install the daily check-in and weekly reminder cron jobs
 
 ### 4. First run
 
@@ -171,6 +172,21 @@ At performance review time: "Summarise my work on the codegen project." Claude r
 
 ---
 
+### `/checkin` — End-of-day check-in
+
+Pulls your merged PRs from GitHub (via `gh` CLI), compares them against existing log entries, and creates `/log` entries for anything you haven't captured yet. Also shows open PRs you're waiting on.
+
+Requires `gh` CLI installed and authenticated (`brew install gh && gh auth login`).
+
+```
+/checkin
+/checkin also had a long design discussion with Nathan about the new API
+```
+
+A macOS notification reminds you to run this at your configured time each weekday.
+
+---
+
 ### `/weekly` — Weekly review
 
 Meant for Friday afternoons. Reads your whole week and surfaces what needs attention:
@@ -242,6 +258,7 @@ knowledge          reference material or learning worth keeping
 |------|---------|------|
 | Morning | `/daily` | ~2 min |
 | Shipped something | `/log what you did and why it mattered` | 10 sec |
+| End of day | `/checkin` | ~3 min |
 | Idea appears | `/idea the idea` | 5 sec |
 | Task to remember | `/task what to do by when` | 5 sec |
 | Idea becomes real | `/refine idea name` | 2 min |
@@ -276,11 +293,13 @@ claudia/
 │   └── skills/
 │       ├── setup/SKILL.md
 │       ├── daily/SKILL.md
+│       ├── checkin/SKILL.md
 │       ├── weekly/SKILL.md
 │       ├── log/SKILL.md
 │       ├── idea/SKILL.md
 │       ├── task/SKILL.md
 │       └── refine/SKILL.md
 └── scripts/
+    ├── checkin-reminder.sh            ← macOS notification via cron (weekdays 5pm)
     └── weekly-reminder.sh             ← macOS notification via cron
 ```

@@ -67,7 +67,17 @@ If they need to target a specific vault in later CLI commands, use `vault="VAULT
 
 ---
 
-**Q3: When do you want your weekly review reminder?**
+**Q3: When do you want your daily check-in reminder?**
+
+> "What time should I remind you to do your end-of-day check-in? This runs Monday–Friday. (e.g. 5pm, 17:30)"
+
+Convert to cron format:
+- Time → `MINUTE HOUR`: e.g. "5pm" → `0 17`, "5:30pm" → `30 17`
+- Days are always `1-5` (Monday–Friday)
+
+---
+
+**Q4: When do you want your weekly review reminder?**
 
 Ask for the day:
 > "Which day for the weekly review reminder? (e.g. Friday, Sunday)"
@@ -81,7 +91,7 @@ Convert to cron format:
 
 ---
 
-**Q4: What kind of work do you do?**
+**Q5: What kind of work do you do?**
 
 > "What's your role? (e.g. software engineer, product manager, designer — a sentence is fine)"
 
@@ -101,14 +111,18 @@ Read `CLAUDE.md` and update:
 
 Read `.claude/hooks/session-start.sh` and update the `VAULT=` line with the correct vault path.
 
-### 3c. Update weekly-reminder.sh
+### 3c. Update checkin-reminder.sh
+
+Read `scripts/checkin-reminder.sh` and update the notification message to include the correct project path.
+
+### 3d. Update weekly-reminder.sh
 
 Read `scripts/weekly-reminder.sh` and update the notification message to include the correct project path.
 
-### 3d. Make scripts executable
+### 3e. Make scripts executable
 
 ```bash
-chmod +x .claude/hooks/session-start.sh scripts/weekly-reminder.sh
+chmod +x .claude/hooks/session-start.sh scripts/checkin-reminder.sh scripts/weekly-reminder.sh
 ```
 
 ---
@@ -182,19 +196,21 @@ obsidian plugin:install id=dataview enable
 
 ---
 
-## Phase 5 — Set up the cron job
+## Phase 5 — Set up cron jobs
 
-Check if a claudia cron entry already exists:
+Check if claudia cron entries already exist:
 ```bash
 crontab -l 2>/dev/null | grep -c "claudia"
 ```
 
-If it exists, show it and ask: "A claudia cron entry already exists. Replace it?"
+If any exist, show them and ask: "Existing claudia cron entries found. Replace them?"
 
-Install or replace:
+Install or replace both cron jobs:
 ```bash
-(crontab -l 2>/dev/null | grep -v "claudia"; echo "[MINUTE] [HOUR] * * [DAY] [PROJECT_PATH]/scripts/weekly-reminder.sh") | crontab -
+(crontab -l 2>/dev/null | grep -v "claudia"; echo "[CHECKIN_MINUTE] [CHECKIN_HOUR] * * 1-5 [PROJECT_PATH]/scripts/checkin-reminder.sh # claudia checkin"; echo "[WEEKLY_MINUTE] [WEEKLY_HOUR] * * [WEEKLY_DAY] [PROJECT_PATH]/scripts/weekly-reminder.sh # claudia weekly") | crontab -
 ```
+
+Use the check-in time from Q3 and the weekly review time from Q4.
 
 Verify:
 ```bash
@@ -210,6 +226,7 @@ crontab -l | grep claudia
 
 **Name**: [name]
 **Vault**: [vault path]
+**Daily check-in**: weekdays at [time]
 **Weekly reminder**: [day] at [time]
 
 ### Done automatically
@@ -219,6 +236,7 @@ crontab -l | grep claudia
 - [x] Atlas and Template files seeded (via Obsidian CLI)
 - [x] Daily note template configured
 - [x] Dataview plugin installed and enabled
+- [x] Daily check-in cron job installed
 - [x] Weekly reminder cron job installed
 
 ### You're ready. Start with:
