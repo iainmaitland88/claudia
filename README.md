@@ -178,8 +178,6 @@ At performance review time: "Summarise my work on the codegen project." Claude r
 
 Pulls your merged PRs from GitHub (via `gh` CLI), compares them against existing log entries, and creates `/log` entries for anything you haven't captured yet. Also shows open PRs you're waiting on.
 
-Requires `gh` CLI installed and authenticated (`brew install gh && gh auth login`).
-
 ```
 /checkin
 /checkin also had a long design discussion with Nathan about the new API
