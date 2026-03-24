@@ -43,10 +43,15 @@ MOC notes: `Atlas/[Name].md` (persistent, updated in place)
 ## Tagging
 Work: work/shipped, work/unblocked, work/led, work/learned, work/improved
 Ideas: idea/work, idea/personal, idea/product, idea/process
+Knowledge: knowledge/engineering, knowledge/process, knowledge/personal, knowledge/reference
 Status: status/unrefined, status/refined, status/active, status/done, status/stale
 
+## Note Types
+work, idea, project, decision, knowledge, daily, weekly-review, prep
+
 ## Urgency Thresholds
-- Idea with status/unrefined older than 7 days → flag
+- Idea with status/unrefined older than 7 days → flag; older than 21 days → auto-archive
+- Active project with no work entry in 14+ days → flag as stalling
 - Work note not created in 3+ working days → flag
 - No weekly review in 10+ days → flag
 - Task overdue → flag immediately

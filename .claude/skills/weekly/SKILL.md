@@ -35,6 +35,19 @@ Run a weekly review. Today: !`date +%Y-%m-%d`. Current week: !`date +%Y-W%V`.
    obsidian search query="type:weekly-review" --output json
    ```
 
+6. **Check for stale active projects**:
+   ```bash
+   obsidian search query="tag:status/refined" --output paths
+   ```
+   Read each project note. Check the `## Work entries` section — find the most recent date listed. If no work entry has been linked in 14+ days, flag the project as stalling.
+
+7. **Auto-archive very stale ideas**:
+   For any unrefined idea older than 21 days (from step 4), auto-archive it:
+   - Update the note's tag from `status/unrefined` to `status/stale`
+   - Move it from `## Unrefined` to `## Archived` in Atlas/Ideas.md
+   Report what was auto-archived: "Auto-archived [N] ideas older than 21 days: [list]. Use `/recall` to find them if needed."
+   The remaining stale ideas (7-21 days) are still presented interactively in the review.
+
 ## Output Format
 
 ```
@@ -50,6 +63,12 @@ Run a weekly review. Today: !`date +%Y-%m-%d`. Current week: !`date +%Y-W%V`.
 ### Unrefined Ideas (> 7 days old)
 For each stale idea:
 - [[note-name]] — added [N] days ago — Keep & act / Archive?
+
+### Stalling Projects
+[Projects with no work entry in 14+ days — or "None"]
+
+### Auto-Archived
+[Ideas older than 21 days that were auto-archived — or "None"]
 
 ### Flags
 [Anything else that needs attention — no weekly review in 10+ days, work log gap, etc.]

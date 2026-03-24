@@ -42,6 +42,12 @@ Run a morning planning session. Today's date: !`date +%Y-%m-%d`.
    ```
    If none found in the last 10 days, flag it.
 
+7. **Check for stale active projects**:
+   ```bash
+   obsidian search query="tag:status/refined" --output paths
+   ```
+   Read each project note. Check the `## Work entries` section — find the most recent date listed. If no work entry has been linked in 14+ days, flag the project as stalling.
+
 ## Output Format
 
 ```
@@ -60,6 +66,9 @@ Run a morning planning session. Today's date: !`date +%Y-%m-%d`.
 - Ideas: [N] unrefined, [N] stale (>7d)
 - Last work note: [date] ([ok / FLAG: X days ago])
 - Last weekly review: [date] ([ok / FLAG: overdue])
+
+**Stalling projects**
+[Projects with no work entry in 14+ days — or "None"]
 
 **Suggested focus**
 [1-3 bullets based on the above signals — specific, not generic]

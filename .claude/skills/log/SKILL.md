@@ -44,6 +44,8 @@ Input: $ARGUMENTS
 
    The **PRs** section is optional — only include it if the achievement references one or more pull requests. A single log entry can reference multiple PRs (even across different repos) when they represent a single logical piece of work.
 
+   **Jira ticket extraction**: If a PR is referenced, check its branch name for a ticket-like prefix (e.g. `ef-123/some-feature` → ticket is `EF-123`). Also check the PR description for ticket references. If found, ask the user to confirm: "Jira ticket EF-123?" If confirmed, add `ticket: EF-123` to the YAML frontmatter.
+
 5. Check for related active projects:
    ```bash
    obsidian search query="type:project tag:status/refined" --output paths
@@ -57,10 +59,14 @@ Input: $ARGUMENTS
      ```
    - Read the project note and check off any `## Steps` items that this achievement completes (change `- [ ]` to `- [x]`).
 
-6. Append to the Work atlas:
-   ```bash
-   obsidian append file="Atlas/Work" content="- [[date-slug]] | [date] | work/TAG"
-   ```
+6. Insert into the correct quarter in the Work atlas:
+   - Determine the quarter from the entry date: Jan-Mar → Q1, Apr-Jun → Q2, Jul-Sep → Q3, Oct-Dec → Q4.
+   - Determine the year from the entry date.
+   - Read Work.md: `obsidian read file="Atlas/Work"`
+   - If the year heading `## [YYYY]` does not exist, create it with all four quarter sub-headings.
+   - Find the `### QN (...)` heading under the correct year.
+   - Insert the entry line (`- [[date-slug]] | [date] | work/TAG`) immediately after the last existing entry under that quarter heading (or directly after the heading if empty).
+   - Write the updated content back using the Edit tool on the vault file directly.
 
 7. Confirm: "Logged as [[date-slug]]. Work atlas now has [N] entries."
 
