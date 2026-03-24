@@ -37,16 +37,23 @@ This is an interactive, conversational skill. Wait for the user's response at ea
 
    If there are no unlogged PRs, say "No new merged PRs found" and skip to Phase 2.
 
-4. **Ask**: "Which PRs do you want to log? (e.g. 1,3 / all / none)"
+4. **Ask**: "Which PRs do you want to log? You can group related PRs into a single entry. (e.g. 1,3 / all / 1+2 as one, 3 / none)"
 
    Wait for the user's response. Accept:
-   - Comma-separated numbers: "1,3" → log PRs 1 and 3
-   - "all" → log all listed PRs
+   - Comma-separated numbers: "1,3" → log PRs 1 and 3 as separate entries
+   - Groups: "1+2 as one, 3" → log PRs 1 and 2 as a single entry, PR 3 as another
+   - "all" → log all listed PRs (suggest groupings if PRs look related — same feature across repos, version bumps paired with the change they support, etc.)
    - "none" → skip PR logging
 
-5. **For each selected PR**, run the /log flow:
-   - Parse what/impact/tag (infer impact from PR title and context)
-   - Use the PR's merge date as the log date, not today's date
+   When suggesting groupings for "all", look for signals like:
+   - PRs in different repos that reference the same feature/ticket
+   - A library bump PR paired with the PR that uses the new version
+   - Multiple PRs that are sequential steps in the same piece of work
+
+5. **For each entry** (single PR or grouped PRs), run the /log flow:
+   - Parse what/impact/tag — for grouped PRs, write a single unified description covering the whole piece of work
+   - Use the earliest PR's merge date as the log date
+   - Include all PR links in the **PRs** field
    - Create the note via `obsidian create`
    - Check for related projects and link them
    - Append to Work atlas
