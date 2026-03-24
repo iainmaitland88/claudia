@@ -40,7 +40,6 @@ type: task
 due: [date or leave blank]
 tags: [task, status/active]
 ---
-
 # [Task title]
 
 **Due**: [date or —]

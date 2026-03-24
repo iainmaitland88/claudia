@@ -27,7 +27,6 @@ Input: $ARGUMENTS
    type: idea
    tags: [idea/TAG, status/unrefined]
    ---
-
    # [Idea title]
 
    [The idea as described — keep it as stated, don't over-elaborate]

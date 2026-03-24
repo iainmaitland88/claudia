@@ -31,7 +31,6 @@ Input: $ARGUMENTS
    type: work
    tags: [work/TAG, status/done]
    ---
-
    # [Achievement title]
 
    **What**: [what was done]
