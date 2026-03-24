@@ -53,7 +53,7 @@ This is an interactive, conversational skill. Wait for the user's response at ea
 5. **For each entry** (single PR or grouped PRs), run the /log flow:
    - Parse what/impact/tag — for grouped PRs, write a single unified description covering the whole piece of work
    - Use the earliest PR's merge date as the log date
-   - Include all PR links in the **PRs** field
+   - Include all PR links as a bullet list under the **PRs** field
    - Create the note via `obsidian create`
    - Check for related projects and link them
    - Append to Work atlas

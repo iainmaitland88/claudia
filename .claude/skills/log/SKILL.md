@@ -38,7 +38,8 @@ Input: $ARGUMENTS
 
    **Impact**: [outcome — what changed]
 
-   **PRs**: [list of PR links, if any]
+   **PRs**:
+   - [PR link]
    "
    ```
 
