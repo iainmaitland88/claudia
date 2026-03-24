@@ -73,7 +73,6 @@ If they need to target a specific vault in later CLI commands, use `vault="VAULT
 
 Convert to cron format:
 - Time → `MINUTE HOUR`: e.g. "5pm" → `0 17`, "5:30pm" → `30 17`
-- Days are always `1-5` (Monday–Friday)
 
 ---
 
@@ -88,6 +87,8 @@ Then the time:
 Convert to cron format:
 - Day names → numbers: Monday=1, Tuesday=2, Wednesday=3, Thursday=4, Friday=5, Saturday=6, Sunday=0
 - Time → `MINUTE HOUR`: e.g. "4:30pm" → `30 16`, "9am" → `0 9`
+
+**Overlap check:** If the weekly review lands on a weekday at the same time as the daily check-in, the weekly review replaces the daily check-in on that day. On Fridays at 5pm you don't need both — `/weekly` covers everything `/checkin` does plus more. Exclude the weekly review day from the daily check-in cron (e.g. if weekly is Friday, daily runs Mon–Thu only).
 
 ---
 
@@ -205,9 +206,16 @@ crontab -l 2>/dev/null | grep -c "claudia"
 
 If any exist, show them and ask: "Existing claudia cron entries found. Replace them?"
 
-Install or replace both cron jobs:
+Install or replace both cron jobs. If the weekly review falls on a weekday at the same time as the daily check-in, exclude that day from the daily check-in cron so only the weekly fires.
+
+For example, if check-in is 5pm and weekly is Friday 5pm:
+- Daily check-in: `0 17 * * 1-4` (Mon–Thu, excludes Friday)
+- Weekly review: `0 17 * * 5` (Fri only)
+
+If they don't overlap (different day or different time), run the daily check-in on all weekdays `1-5`.
+
 ```bash
-(crontab -l 2>/dev/null | grep -v "claudia"; echo "[CHECKIN_MINUTE] [CHECKIN_HOUR] * * 1-5 [PROJECT_PATH]/scripts/checkin-reminder.sh # claudia checkin"; echo "[WEEKLY_MINUTE] [WEEKLY_HOUR] * * [WEEKLY_DAY] [PROJECT_PATH]/scripts/weekly-reminder.sh # claudia weekly") | crontab -
+(crontab -l 2>/dev/null | grep -v "claudia"; echo "[CHECKIN_MINUTE] [CHECKIN_HOUR] * * [CHECKIN_DAYS] [PROJECT_PATH]/scripts/checkin-reminder.sh # claudia checkin"; echo "[WEEKLY_MINUTE] [WEEKLY_HOUR] * * [WEEKLY_DAY] [PROJECT_PATH]/scripts/weekly-reminder.sh # claudia weekly") | crontab -
 ```
 
 Use the check-in time from Q3 and the weekly review time from Q4.
