@@ -30,6 +30,11 @@ obsidian append file="Atlas/Tasks" content="- [ ] [task description] | Due: YYYY
 ```
 (Omit `| Due:` part if no deadline.)
 
+Example: `/task Review outstanding PRs in EF BE repo by March 25th` →
+```bash
+obsidian append file="Atlas/Tasks" content="- [ ] Review outstanding PRs in EF BE repo | Due: 2026-03-25"
+```
+
 ### 5b — Full note
 
 Create the note:
