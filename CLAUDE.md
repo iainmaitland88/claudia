@@ -1,6 +1,6 @@
 # Second Brain — Personal Knowledge Base
 
-This system is Iain's PKB: a growing, connected record of his work, ideas, knowledge, and goals.
+This system is Iain's PKB: a growing, connected record of his work, ideas, and knowledge.
 Run `claude` from this directory to access it.
 
 ## Vault
@@ -33,26 +33,22 @@ Note: Skills fall back to direct Read/Edit file tools if the CLI returns an erro
 ## Key Paths
 - Daily notes: `2026/MM/YYYY-MM-DD.md`
 - All notes: `Notes/` (flat)
-- MOC hubs: `Atlas/Work.md`, `Atlas/Ideas.md`, `Atlas/Goals.md`, `Atlas/Knowledge.md`, `Atlas/Tasks.md`
-- Goal notes: `Notes/goal-health.md`, `Notes/goal-sleep.md`, `Notes/goal-fitness.md`, `Notes/goal-diet.md`
+- MOC hubs: `Atlas/Work.md`, `Atlas/Ideas.md`, `Atlas/Knowledge.md`, `Atlas/Tasks.md`
 - Weekly reviews saved as: `Notes/weekly-YYYY-WNN.md`
 
 ## Note Naming
 New notes: `Notes/YYYY-MM-DD-short-slug.md`
-Goal notes: `Notes/goal-[persona].md` (persistent, updated in place)
 MOC notes: `Atlas/[Name].md` (persistent, updated in place)
 
 ## Tagging
 Work: #work/shipped #work/unblocked #work/led #work/learned #work/improved
 Ideas: #idea/work #idea/personal #idea/product #idea/process
-Goals: #goal/health #goal/sleep #goal/fitness #goal/diet
 Status: #status/unrefined #status/refined #status/active #status/done #status/stale
 
 ## Urgency Thresholds
 - Idea with #status/unrefined older than 7 days → flag
 - Work note not created in 3+ working days → flag
 - No weekly review in 10+ days → flag
-- Goal note not updated in 30+ days → flag
 - Task overdue → flag immediately
 
 ## Tone

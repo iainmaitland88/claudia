@@ -1,6 +1,6 @@
 ---
 name: weekly
-description: Weekly review - flags forgotten ideas/tasks, summarises the week, checks goals
+description: Weekly review - flags forgotten ideas/tasks, summarises the week
 ---
 
 Run a weekly review. Today: !`date +%Y-%m-%d`. Current week: !`date +%Y-W%V`.
@@ -30,15 +30,7 @@ Run a weekly review. Today: !`date +%Y-%m-%d`. Current week: !`date +%Y-W%V`.
    ```
    Check the `## Unrefined` section. For each linked note, read it and check its `date:` frontmatter.
 
-5. **Read all goal notes**:
-   ```bash
-   obsidian read file="Notes/goal-health"
-   obsidian read file="Notes/goal-sleep"
-   obsidian read file="Notes/goal-fitness"
-   obsidian read file="Notes/goal-diet"
-   ```
-
-6. **Check last weekly review**:
+5. **Check last weekly review**:
    ```bash
    obsidian search query="type:weekly-review" --output json
    ```
@@ -58,12 +50,6 @@ Run a weekly review. Today: !`date +%Y-%m-%d`. Current week: !`date +%Y-W%V`.
 ### Unrefined Ideas (> 7 days old)
 For each stale idea:
 - [[note-name]] — added [N] days ago — Keep & act / Archive?
-
-### Goals
-- Health: last updated [date] — [one-line status from data log]
-- Sleep: last updated [date] — [one-line status]
-- Fitness: last updated [date] — [one-line status]
-- Diet: last updated [date] — [one-line status]
 
 ### Flags
 [Anything else that needs attention — no weekly review in 10+ days, work log gap, etc.]

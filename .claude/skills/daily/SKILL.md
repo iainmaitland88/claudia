@@ -42,12 +42,6 @@ Run a morning planning session. Today's date: !`date +%Y-%m-%d`.
    ```
    If none found in the last 10 days, flag it.
 
-7. **Check goal notes briefly** (only flag if stale):
-   ```bash
-   obsidian search query="type:goal" --output paths
-   ```
-   For each, check `last-reviewed` frontmatter. Flag if > 30 days ago.
-
 ## Output Format
 
 ```

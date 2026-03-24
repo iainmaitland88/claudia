@@ -4,15 +4,14 @@
   <img src="claudia.png" alt="Claudia" />
 </p>
 
-A personal knowledge base (PKB) built on Claude Code and Obsidian. Not a productivity app — a growing, connected record of your work, ideas, knowledge, and goals that compounds in value over time.
+A personal knowledge base (PKB) built on Claude Code and Obsidian. Not a productivity app — a growing, connected record of your work, ideas, and knowledge that compounds in value over time.
 
 ## What it does
 
 - **Logs work achievements** as individual notes, so when performance review season arrives your highlight reel is already written
 - **Captures ideas** before they're forgotten, tracks them from unrefined to active project to shipped
 - **Plans your day** each morning with a briefing that flags what's urgent, what's stale, and what needs your attention
-- **Reviews your week** every Friday — surfaces forgotten tasks, stale ideas, and checks in on long-term goals
-- **Tracks long-term goals** with structured data logging and trend analysis (weight loss, sleep, fitness, diet, anything with a measurable metric)
+- **Reviews your week** every Friday — surfaces forgotten tasks and stale ideas
 
 The system uses [Claude Code](https://claude.ai/code) custom skills as the interface and an [Obsidian](https://obsidian.md) vault as the storage layer. Claude reads and writes vault notes via the Obsidian CLI. Obsidian renders the graph, backlinks, and Dataview queries.
 
@@ -50,7 +49,7 @@ This walks you through four questions (name, vault, weekly review schedule, role
 
 - Update all config files with your paths
 - Create the vault folder structure
-- Seed all Atlas, Goal, and Template files
+- Seed all Atlas and Template files
 - Configure the daily note template
 - Install and enable the Dataview plugin
 - Install the weekly reminder cron job
@@ -179,34 +178,12 @@ Meant for Friday afternoons. Reads your whole week and surfaces what needs atten
 - What got done (from work notes and daily notes)
 - Overdue tasks
 - Stale unrefined ideas that need a decision
-- Goal check-in across all four personas
 
 Claude walks you through triaging stale ideas one by one, then offers to save the review as a note.
 
 ```
 /weekly
 ```
-
----
-
-### `/review-goals` — Goal review
-
-Reviews one or all goal personas with trend analysis, not just a status snapshot.
-
-```
-/review-goals
-/review-goals health
-```
-
-For each goal it shows:
-- Progress from start to current value
-- Actual rate of change vs needed rate to hit the target
-- Whether you're on pace
-- Logging consistency
-- An honest assessment
-- A suggested adjustment — only if the data supports one (flat or worsening for 2+ weeks)
-
-To log a data point mid-conversation: "log my weight as 84.2kg" — Claude appends it to the goal note's data log.
 
 ---
 
@@ -218,13 +195,8 @@ Obsidian Vault/
 │   ├── Work.md             ← Hub for all work achievement notes
 │   ├── Ideas.md            ← Hub for all idea and project notes
 │   ├── Tasks.md            ← Open tasks with deadlines
-│   ├── Goals.md            ← Links to the four goal persona notes
 │   └── Knowledge.md        ← Hub for learnings and reference material
 ├── Notes/                  ← All individual notes (flat, no subfolders)
-│   ├── goal-health.md
-│   ├── goal-sleep.md
-│   ├── goal-fitness.md
-│   ├── goal-diet.md
 │   └── YYYY-MM-DD-slug.md  ← Ideas, work entries, tasks, projects, weekly reviews
 ├── Daily Notes/
 │   ├── Templates/
@@ -235,7 +207,7 @@ Obsidian Vault/
 
 ### Why flat `Notes/`?
 
-All notes live in one flat folder. Organisation comes from **tags** and **links**, not subfolders. This is intentional — it lets Obsidian's graph build naturally. A note about an auth refactor can link to a TypeScript learning note, which links to a related idea, which links back to a goal. Folders would silo them.
+All notes live in one flat folder. Organisation comes from **tags** and **links**, not subfolders. This is intentional — it lets Obsidian's graph build naturally. A note about an auth refactor can link to a TypeScript learning note, which links to a related idea. Folders would silo them.
 
 The `Atlas/` folder holds **Maps of Content (MOCs)** — index notes that link to related notes. They're navigational hubs, not containers. The Work atlas doesn't *contain* work notes; it *links* to them.
 
@@ -252,11 +224,6 @@ The `Atlas/` folder holds **Maps of Content (MOCs)** — index notes that link t
 #idea/personal      personal life idea
 #idea/product       product/feature idea
 #idea/process       process/tooling improvement
-
-#goal/health
-#goal/sleep
-#goal/fitness
-#goal/diet
 
 #status/unrefined   raw idea — needs refining
 #status/refined     idea refined into an active project
@@ -279,7 +246,6 @@ The `Atlas/` folder holds **Maps of Content (MOCs)** — index notes that link t
 | Task to remember | `/task what to do by when` | 5 sec |
 | Idea becomes real | `/refine idea name` | 2 min |
 | Friday afternoon | `/weekly` | ~10 min |
-| Goal check-in | `/review-goals` | ~5 min |
 | Perf review season | "Summarise my work in Q1" | 0 prep — already logged |
 
 ---
@@ -294,7 +260,7 @@ The system is designed to expand without friction.
 
 **New Atlas hub:** create `Atlas/Reading.md`, add a line to `CLAUDE.md` under Key Paths. Done.
 
-The vault compounds in value over time. After a year of logging, you can ask Claude "what work have I done related to TypeScript?" or "how have my sleep habits changed since March?" and it will traverse the links and give you a real answer.
+The vault compounds in value over time. After a year of logging, you can ask Claude "what work have I done related to TypeScript?" and it will traverse the links and give you a real answer.
 
 ---
 
@@ -314,8 +280,7 @@ claudia/
 │       ├── log/SKILL.md
 │       ├── idea/SKILL.md
 │       ├── task/SKILL.md
-│       ├── refine/SKILL.md
-│       └── review-goals/SKILL.md
+│       └── refine/SKILL.md
 └── scripts/
     └── weekly-reminder.sh             ← macOS notification via cron
 ```

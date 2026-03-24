@@ -148,33 +148,18 @@ obsidian create path="Atlas/Ideas.md" content="Map of all idea notes. Reviewed w
 obsidian create path="Atlas/Tasks.md" content="One-off tasks with deadlines. Reviewed daily — overdue items are flagged immediately.\n\n## Open\n\n## Done"
 ```
 
-**Atlas/Goals.md**:
-```bash
-obsidian create path="Atlas/Goals.md" content="- [[goal-health]] — physical health, weight, energy\n- [[goal-sleep]] — sleep quality and consistency\n- [[goal-fitness]] — exercise, strength, endurance\n- [[goal-diet]] — nutrition and eating habits"
-```
-
 **Atlas/Knowledge.md**:
 ```bash
 obsidian create path="Atlas/Knowledge.md" content="## Engineering\n\n## Process & Craft\n\n## Personal\n\n## Reference"
 ```
 
-### 4c. Seed goal notes
-
-For each of `goal-health`, `goal-sleep`, `goal-fitness`, `goal-diet`, check if it exists and create if not.
+### 4c. Create the daily note template
 
 ```bash
-obsidian create path="Notes/goal-health.md" content="---\ntype: goal\npersona: health\ntags:\n  - goal/health\nlast-reviewed: \"\"\ntarget: \"\"\nmetric: \"\"\n---\n\n# Health\n\n## Goal\n\n## Why It Matters\n\n## Current Approach\n\n## Recent Adjustments\n\n| Date | Change | Why |\n|------|--------|-----|\n\n## Commitments This Week\n\n- [ ]\n\n## Data Log\n\n| Date | Value | Notes |\n|------|-------|-------|\n\n## Review History\n\n| Date | Trend | Assessment |\n|------|-------|------------|"
+obsidian create path="Daily Notes/Templates/Daily Note.md" content="---\ndate: {{date:YYYY-MM-DD}}\ntype: daily\n---\n\n# {{date:dddd, MMMM D, YYYY}}\n\n## Focus\n> What's the one thing that makes today a success?\n\n## Tasks\n- [ ]\n\n## Notes & Ideas\n> Anything worth capturing? Use /idea or /task if it needs tracking.\n\n## Work\n> Anything shipped or unblocked today? Use /log to record it.\n\n## End of Day\n- [ ] Anything worth logging with /log?\n- [ ] Any new ideas captured?\n- [ ] Ideas captured or refined?"
 ```
 
-Repeat for sleep, fitness, diet — substituting the persona name and tag in each.
-
-### 4d. Create the daily note template
-
-```bash
-obsidian create path="Daily Notes/Templates/Daily Note.md" content="---\ndate: {{date:YYYY-MM-DD}}\ntype: daily\n---\n\n# {{date:dddd, MMMM D, YYYY}}\n\n## Focus\n> What's the one thing that makes today a success?\n\n## Tasks\n- [ ]\n\n## Morning Metrics\n> Log any tracked goal metrics here (e.g. weight, sleep hours)\n\n## Notes & Ideas\n> Anything worth capturing? Use /idea or /task if it needs tracking.\n\n## Work\n> Anything shipped or unblocked today? Use /log to record it.\n\n## End of Day\n- [ ] Anything worth logging with /log?\n- [ ] Any new ideas captured?\n- [ ] Ideas captured or refined?"
-```
-
-### 4e. Configure the daily note template setting
+### 4d. Configure the daily note template setting
 
 This can't be done via the CLI. Write directly to the vault's Obsidian config:
 
@@ -189,7 +174,7 @@ cat "$VAULT_PATH/.obsidian/daily-notes.json"
 
 Update it to include the template field. The file is JSON — merge in `"template": "Daily Notes/Templates/Daily Note"` while preserving existing fields (like `format`). Write the result back using the Write tool.
 
-### 4f. Install Dataview plugin
+### 4e. Install Dataview plugin
 
 ```bash
 obsidian plugin:install id=dataview enable
@@ -231,7 +216,7 @@ crontab -l | grep claudia
 - [x] CLAUDE.md configured
 - [x] session-start.sh configured
 - [x] Vault folders created (via Obsidian CLI)
-- [x] Atlas, Goals, and Template files seeded (via Obsidian CLI)
+- [x] Atlas and Template files seeded (via Obsidian CLI)
 - [x] Daily note template configured
 - [x] Dataview plugin installed and enabled
 - [x] Weekly reminder cron job installed
