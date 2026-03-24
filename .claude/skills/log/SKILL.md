@@ -37,8 +37,12 @@ Input: $ARGUMENTS
    **What**: [what was done]
 
    **Impact**: [outcome — what changed]
+
+   **PRs**: [list of PR links, if any]
    "
    ```
+
+   The **PRs** section is optional — only include it if the achievement references one or more pull requests. A single log entry can reference multiple PRs (even across different repos) when they represent a single logical piece of work.
 
 5. Check for related active projects:
    ```bash
