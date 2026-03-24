@@ -22,6 +22,7 @@ The system uses [Claude Code](https://claude.ai/code) custom skills as the inter
 
 - [Claude Code](https://claude.ai/code) installed
 - [Obsidian](https://obsidian.md) v1.12.4 or later (for the built-in CLI)
+- [GitHub CLI](https://cli.github.com/) installed and authenticated (`brew install gh && gh auth login`) — used by `/checkin` to pull PRs
 - [alerter](https://github.com/vjeantet/alerter) for macOS notifications (optional, for reminders)
 
 ---
