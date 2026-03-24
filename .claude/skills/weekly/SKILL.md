@@ -22,7 +22,7 @@ Run a weekly review. Today: !`date +%Y-%m-%d`. Current week: !`date +%Y-W%V`.
    ```bash
    obsidian read file="Atlas/Tasks"
    ```
-   Parse all open items. Flag overdue (past due date) and due within 7 days.
+   Parse all unchecked (`- [ ]`) items. Flag overdue (past due date) and due within 7 days.
 
 4. **Find stale unrefined ideas** (> 7 days old):
    ```bash

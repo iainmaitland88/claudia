@@ -159,7 +159,7 @@ obsidian create path="Atlas/Ideas.md" content="Map of all idea notes. Reviewed w
 
 **Atlas/Tasks.md**:
 ```bash
-obsidian create path="Atlas/Tasks.md" content="One-off tasks with deadlines. Reviewed daily — overdue items are flagged immediately.\n\n## Open\n\n## Done"
+obsidian create path="Atlas/Tasks.md" content="One-off tasks with deadlines. Reviewed daily — overdue items are flagged immediately.\nUnchecked = open, checked = done."
 ```
 
 **Atlas/Knowledge.md**:

@@ -22,7 +22,7 @@ Run a morning planning session. Today's date: !`date +%Y-%m-%d`.
    ```bash
    obsidian read file="Atlas/Tasks"
    ```
-   Parse all `## Open` lines. Flag anything with `Due:` date on or before today as OVERDUE. Flag anything due within 7 days as "Coming up".
+   Parse all unchecked (`- [ ]`) lines. Flag anything with `Due:` date on or before today as OVERDUE. Flag anything due within 7 days as "Coming up".
 
 4. **Check unrefined ideas** for stale items:
    ```bash
