@@ -105,15 +105,15 @@ Creates a linked note for a work achievement and appends it to `Atlas/Work.md`. 
 /log Led the Q1 architecture review, got alignment on the new service boundary proposal
 ```
 
-Each entry gets a `#work/` tag automatically:
+Each entry gets a `work/` tag automatically:
 
 | Tag | Meaning |
 |-----|---------|
-| `#work/shipped` | Completed and delivered something |
-| `#work/unblocked` | Removed a blocker for others |
-| `#work/led` | Led an initiative, decision, or review |
-| `#work/learned` | Gained a significant technical insight |
-| `#work/improved` | Improved a process, codebase, or team health |
+| `work/shipped` | Completed and delivered something |
+| `work/unblocked` | Removed a blocker for others |
+| `work/led` | Led an initiative, decision, or review |
+| `work/learned` | Gained a significant technical insight |
+| `work/improved` | Improved a process, codebase, or team health |
 
 ---
 
@@ -214,24 +214,24 @@ The `Atlas/` folder holds **Maps of Content (MOCs)** — index notes that link t
 ### Tagging taxonomy
 
 ```
-#work/shipped       completed deliverable
-#work/unblocked     removed a blocker
-#work/led           led an initiative or decision
-#work/learned       significant technical learning
-#work/improved      process or quality improvement
+work/shipped       completed deliverable
+work/unblocked     removed a blocker
+work/led           led an initiative or decision
+work/learned       significant technical learning
+work/improved      process or quality improvement
 
-#idea/work          work-related idea
-#idea/personal      personal life idea
-#idea/product       product/feature idea
-#idea/process       process/tooling improvement
+idea/work          work-related idea
+idea/personal      personal life idea
+idea/product       product/feature idea
+idea/process       process/tooling improvement
 
-#status/unrefined   raw idea — needs refining
-#status/refined     idea refined into an active project
-#status/active      being worked on (tasks)
-#status/done        complete
-#status/stale       needs review
+status/unrefined   raw idea — needs refining
+status/refined     idea refined into an active project
+status/active      being worked on (tasks)
+status/done        complete
+status/stale       needs review
 
-#knowledge          reference material or learning worth keeping
+knowledge          reference material or learning worth keeping
 ```
 
 ---

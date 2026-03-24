@@ -23,8 +23,8 @@ Key commands used in skills:
 - `obsidian daily:read` — read today's daily note
 - `obsidian daily:append content="text"` — append to today's daily note
 - `obsidian daily:path` — get today's daily note path
-- `obsidian search query="tag:#status/unrefined"` — search by tag
-- `obsidian search query="tag:#work/shipped after:2026-01-01"` — search with date filter
+- `obsidian search query="tag:status/unrefined"` — search by tag
+- `obsidian search query="tag:work/shipped after:2026-01-01"` — search with date filter
 - `obsidian properties:set file="Name" key="last-reviewed" value="2026-03-23"` — update frontmatter
 - `obsidian files path="Notes/"` — list files in a folder
 
@@ -41,12 +41,12 @@ New notes: `Notes/YYYY-MM-DD-short-slug.md`
 MOC notes: `Atlas/[Name].md` (persistent, updated in place)
 
 ## Tagging
-Work: #work/shipped #work/unblocked #work/led #work/learned #work/improved
-Ideas: #idea/work #idea/personal #idea/product #idea/process
-Status: #status/unrefined #status/refined #status/active #status/done #status/stale
+Work: work/shipped, work/unblocked, work/led, work/learned, work/improved
+Ideas: idea/work, idea/personal, idea/product, idea/process
+Status: status/unrefined, status/refined, status/active, status/done, status/stale
 
 ## Urgency Thresholds
-- Idea with #status/unrefined older than 7 days → flag
+- Idea with status/unrefined older than 7 days → flag
 - Work note not created in 3+ working days → flag
 - No weekly review in 10+ days → flag
 - Task overdue → flag immediately

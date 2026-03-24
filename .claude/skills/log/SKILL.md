@@ -16,11 +16,11 @@ Input: $ARGUMENTS
    - **What**: what was done (1-2 sentences)
    - **Impact**: what changed / what was the outcome (infer if not stated, flag it)
    - **Tag**: pick the most fitting — don't ask, just pick:
-     - `#work/shipped` — completed and delivered something
-     - `#work/unblocked` — removed a blocker for others
-     - `#work/led` — led an initiative, decision, or review
-     - `#work/learned` — gained a significant technical or professional insight
-     - `#work/improved` — improved a process, codebase, or team health
+     - `work/shipped` — completed and delivered something
+     - `work/unblocked` — removed a blocker for others
+     - `work/led` — led an initiative, decision, or review
+     - `work/learned` — gained a significant technical or professional insight
+     - `work/improved` — improved a process, codebase, or team health
 
 3. Generate a short slug from the achievement title (lowercase, hyphens, 4-6 words max).
 
@@ -42,7 +42,7 @@ Input: $ARGUMENTS
 
 5. Check for related active projects:
    ```bash
-   obsidian search query="type:project tag:#status/refined" --output paths
+   obsidian search query="type:project tag:status/refined" --output paths
    ```
    If any project notes seem topically related to this achievement, ask:
    "Is this related to [[project-name]]?"
@@ -55,7 +55,7 @@ Input: $ARGUMENTS
 
 6. Append to the Work atlas:
    ```bash
-   obsidian append file="Atlas/Work" content="- [[date-slug]] | [date] | #work/TAG"
+   obsidian append file="Atlas/Work" content="- [[date-slug]] | [date] | work/TAG"
    ```
 
 7. Confirm: "Logged as [[date-slug]]. Work atlas now has [N] entries."

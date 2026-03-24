@@ -15,10 +15,10 @@ Input: $ARGUMENTS
 2. Generate a short slug from the idea (lowercase, hyphens, 4-6 words max).
 
 3. Pick the most fitting tag — don't ask, just pick:
-   - `#idea/work` — work-related, could benefit the team or product
-   - `#idea/personal` — personal life improvement
-   - `#idea/product` — product feature or user-facing improvement
-   - `#idea/process` — process, tooling, or workflow improvement
+   - `idea/work` — work-related, could benefit the team or product
+   - `idea/personal` — personal life improvement
+   - `idea/product` — product feature or user-facing improvement
+   - `idea/process` — process, tooling, or workflow improvement
 
 4. Create the note:
    ```bash

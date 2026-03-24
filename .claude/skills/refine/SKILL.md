@@ -12,7 +12,7 @@ Input: $ARGUMENTS
 
 1. Find the idea note:
    ```bash
-   obsidian search query="type:idea tag:#status/unrefined" --output paths
+   obsidian search query="type:idea tag:status/unrefined" --output paths
    ```
    If $ARGUMENTS is provided, filter results by name matching $ARGUMENTS.
    If multiple matches or no $ARGUMENTS, list them and ask: "Which idea do you want to refine?"
@@ -25,7 +25,7 @@ Input: $ARGUMENTS
 
 3. Ask: "What are the steps to complete this? List them one per line."
 
-4. Update the note — change `type: idea` → `type: project`, `#status/unrefined` → `#status/refined`, and add sections:
+4. Update the note — change `type: idea` → `type: project`, `status/unrefined` → `status/refined`, and add sections:
    ```bash
    obsidian properties:set file="[note-name]" key="type" value="project"
    ```
@@ -49,4 +49,4 @@ Input: $ARGUMENTS
 ---
 
 As the project progresses, `/log` entries will be linked back to this note under `## Work entries`.
-When all steps are done, tell Claude to mark it as complete — it will update the tag to `#status/done` and move it to `## Archived` in the Ideas atlas.
+When all steps are done, tell Claude to mark it as complete — it will update the tag to `status/done` and move it to `## Archived` in the Ideas atlas.

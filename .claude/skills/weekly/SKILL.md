@@ -58,7 +58,7 @@ For each stale idea:
 ## After Showing
 
 1. For each stale idea, ask: "Keep and assign a next task, or archive?"
-   - If keeping: update the note's tag from `#status/unrefined` to `#status/refined` using:
+   - If keeping: update the note's tag from `status/unrefined` to `status/refined` using:
      ```bash
      obsidian properties:set file="[note]" key="tags" value="..."
      ```
