@@ -22,6 +22,7 @@ The system uses [Claude Code](https://claude.ai/code) custom skills as the inter
 
 - [Claude Code](https://claude.ai/code) installed
 - [Obsidian](https://obsidian.md) v1.12.4 or later (for the built-in CLI)
+- [alerter](https://github.com/vjeantet/alerter) for macOS notifications (`brew install vjeantet/tap/alerter`)
 
 ---
 
@@ -53,7 +54,7 @@ This walks you through five questions (name, vault, check-in time, weekly review
 - Seed all Atlas and Template files
 - Configure the daily note template
 - Install and enable the Dataview plugin
-- Install the daily check-in and weekly reminder cron jobs
+- Install the daily check-in and weekly reminder launchd agents
 
 ### 4. First run
 
@@ -72,7 +73,7 @@ Skills are Claude Code slash commands. Run them from inside a `claude` session s
 
 ### `/setup` — First-time setup
 
-Run this once after cloning. Walks you through a short questionnaire, then automatically configures paths, creates the vault folder structure, seeds all required files, and installs the weekly reminder cron job.
+Run this once after cloning. Walks you through a short questionnaire, then automatically configures paths, creates the vault folder structure, seeds all required files, and installs the check-in and weekly reminder launchd agents.
 
 ```
 /setup
@@ -300,6 +301,8 @@ claudia/
 │       ├── task/SKILL.md
 │       └── refine/SKILL.md
 └── scripts/
-    ├── checkin-reminder.sh            ← macOS notification via cron (weekdays 5pm)
-    └── weekly-reminder.sh             ← macOS notification via cron
+    ├── checkin-reminder.sh            ← macOS notification via launchd (weekdays)
+    ├── weekly-reminder.sh             ← macOS notification via launchd
+    ├── install-launchd.sh             ← Installs launchd agents for reminders
+    └── uninstall-launchd.sh           ← Removes launchd agents
 ```

@@ -42,6 +42,22 @@ obsidian version
 
 If this fails, the CLI isn't registered. Ask the user to check the Obsidian setting and try again. Do NOT proceed until this command succeeds.
 
+### Step 4 — Check alerter is installed
+
+```bash
+which alerter 2>/dev/null || echo "not found"
+```
+
+If not found, tell the user:
+
+> **You need alerter for macOS notifications.**
+>
+> ```bash
+> brew install vjeantet/tap/alerter
+> ```
+
+**Wait for the user to confirm before continuing.**
+
 ---
 
 ## Phase 2 — Questionnaire
@@ -71,8 +87,9 @@ If they need to target a specific vault in later CLI commands, use `vault="VAULT
 
 > "What time should I remind you to do your end-of-day check-in? This runs Monday–Friday. (e.g. 5pm, 17:30)"
 
-Convert to cron format:
-- Time → `MINUTE HOUR`: e.g. "5pm" → `0 17`, "5:30pm" → `30 17`
+Convert to hour and minute:
+- "5pm" → hour=17, minute=0
+- "5:30pm" → hour=17, minute=30
 
 ---
 
@@ -84,11 +101,9 @@ Ask for the day:
 Then the time:
 > "What time? (e.g. 4:30pm, 17:00)"
 
-Convert to cron format:
+Convert to day number and hour/minute:
 - Day names → numbers: Monday=1, Tuesday=2, Wednesday=3, Thursday=4, Friday=5, Saturday=6, Sunday=0
-- Time → `MINUTE HOUR`: e.g. "4:30pm" → `30 16`, "9am" → `0 9`
-
-**Overlap check:** If the weekly review lands on a weekday at the same time as the daily check-in, the weekly review replaces the daily check-in on that day. On Fridays at 5pm you don't need both — `/weekly` covers everything `/checkin` does plus more. Exclude the weekly review day from the daily check-in cron (e.g. if weekly is Friday, daily runs Mon–Thu only).
+- "4:30pm" → hour=16, minute=30; "9am" → hour=9, minute=0
 
 ---
 
@@ -112,15 +127,7 @@ Read `CLAUDE.md` and update:
 
 Read `.claude/hooks/session-start.sh` and update the `VAULT=` line with the correct vault path.
 
-### 3c. Update checkin-reminder.sh
-
-Read `scripts/checkin-reminder.sh` and update the notification message to include the correct project path.
-
-### 3d. Update weekly-reminder.sh
-
-Read `scripts/weekly-reminder.sh` and update the notification message to include the correct project path.
-
-### 3e. Make scripts executable
+### 3c. Make scripts executable
 
 ```bash
 chmod +x .claude/hooks/session-start.sh scripts/checkin-reminder.sh scripts/weekly-reminder.sh
@@ -197,32 +204,29 @@ obsidian plugin:install id=dataview enable
 
 ---
 
-## Phase 5 — Set up cron jobs
+## Phase 5 — Set up launchd agents
 
-Check if claudia cron entries already exist:
+Check if claudia launchd agents already exist:
 ```bash
-crontab -l 2>/dev/null | grep -c "claudia"
+launchctl list 2>/dev/null | grep claudia
 ```
 
-If any exist, show them and ask: "Existing claudia cron entries found. Replace them?"
+If any exist, show them and ask: "Existing claudia launchd agents found. Replace them?"
 
-Install or replace both cron jobs. If the weekly review falls on a weekday at the same time as the daily check-in, exclude that day from the daily check-in cron so only the weekly fires.
+Install the agents using the install script. Convert the user's check-in time (Q3) and weekly review schedule (Q4) to the required arguments:
 
-For example, if check-in is 5pm and weekly is Friday 5pm:
-- Daily check-in: `0 17 * * 1-4` (Mon–Thu, excludes Friday)
-- Weekly review: `0 17 * * 5` (Fri only)
+- Day names → numbers: Monday=1, Tuesday=2, Wednesday=3, Thursday=4, Friday=5, Saturday=6, Sunday=0
+- Time → HOUR and MINUTE: e.g. "5pm" → hour=17, minute=0; "4:30pm" → hour=16, minute=30
 
-If they don't overlap (different day or different time), run the daily check-in on all weekdays `1-5`.
+The install script handles the overlap logic automatically (if weekly review lands on a weekday at the same time as the daily check-in, it excludes that day from the daily schedule).
 
 ```bash
-(crontab -l 2>/dev/null | grep -v "claudia"; echo "[CHECKIN_MINUTE] [CHECKIN_HOUR] * * [CHECKIN_DAYS] [PROJECT_PATH]/scripts/checkin-reminder.sh # claudia checkin"; echo "[WEEKLY_MINUTE] [WEEKLY_HOUR] * * [WEEKLY_DAY] [PROJECT_PATH]/scripts/weekly-reminder.sh # claudia weekly") | crontab -
+bash [PROJECT_PATH]/scripts/install-launchd.sh [PROJECT_PATH] [CHECKIN_HOUR] [CHECKIN_MINUTE] [WEEKLY_DAY] [WEEKLY_HOUR] [WEEKLY_MINUTE]
 ```
-
-Use the check-in time from Q3 and the weekly review time from Q4.
 
 Verify:
 ```bash
-crontab -l | grep claudia
+launchctl list | grep claudia
 ```
 
 ---
@@ -244,8 +248,8 @@ crontab -l | grep claudia
 - [x] Atlas and Template files seeded (via Obsidian CLI)
 - [x] Daily note template configured
 - [x] Dataview plugin installed and enabled
-- [x] Daily check-in cron job installed
-- [x] Weekly reminder cron job installed
+- [x] Daily check-in launchd agent installed
+- [x] Weekly reminder launchd agent installed
 
 ### You're ready. Start with:
    cd [PROJECT_PATH] && claude
