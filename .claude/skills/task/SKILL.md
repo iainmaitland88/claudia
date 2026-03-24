@@ -23,50 +23,47 @@ Input: $ARGUMENTS
    - **Line item** (default): task is one sentence, no context/links/files mentioned
    - **Full note**: context, background, links, or files were mentioned in the input
 
-### 5a — Line item
+5. **If line item** — append to the Tasks atlas:
+   ```bash
+   obsidian append file="Atlas/Tasks" content="- [ ] [task description] | Due: YYYY-MM-DD"
+   ```
+   (Omit `| Due:` part if no deadline.)
 
-```bash
-obsidian append file="Atlas/Tasks" content="- [ ] [task description] | Due: YYYY-MM-DD"
-```
-(Omit `| Due:` part if no deadline.)
+   Example: `/task Review outstanding PRs in EF BE repo by March 25th` →
+   ```bash
+   obsidian append file="Atlas/Tasks" content="- [ ] Review outstanding PRs in EF BE repo | Due: 2026-03-25"
+   ```
 
-Example: `/task Review outstanding PRs in EF BE repo by March 25th` →
-```bash
-obsidian append file="Atlas/Tasks" content="- [ ] Review outstanding PRs in EF BE repo | Due: 2026-03-25"
-```
+6. **If full note** — create the note:
+   ```bash
+   obsidian create name="[date]-[slug]" path="Notes/" content="---
+   date: [date]
+   type: task
+   due: [date or leave blank]
+   tags: [task, status/active]
+   ---
+   # [Task title]
 
-### 5b — Full note
+   **Due**: [date or —]
 
-Create the note:
-```bash
-obsidian create name="[date]-[slug]" path="Notes/" content="---
-date: [date]
-type: task
-due: [date or leave blank]
-tags: [task, status/active]
----
-# [Task title]
+   ## What to do
+   [task description]
 
-**Due**: [date or —]
+   ## Links
 
-## What to do
-[task description]
+   ## Notes
+   [any context provided in the input]
 
-## Links
+   ## Files
+   "
+   ```
 
-## Notes
-[any context provided in the input]
+   Then link it from the Tasks atlas:
+   ```bash
+   obsidian append file="Atlas/Tasks" content="- [ ] [[date-slug]] | Due: YYYY-MM-DD"
+   ```
 
-## Files
-"
-```
-
-Then link it from the Tasks atlas:
-```bash
-obsidian append file="Atlas/Tasks" content="- [ ] [[date-slug]] | Due: YYYY-MM-DD"
-```
-
-6. Confirm: "Added. You have [N] open tasks."
+7. Confirm: "Added. You have [N] open tasks."
 
 ---
 
