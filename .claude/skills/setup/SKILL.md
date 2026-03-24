@@ -42,22 +42,6 @@ obsidian version
 
 If this fails, the CLI isn't registered. Ask the user to check the Obsidian setting and try again. Do NOT proceed until this command succeeds.
 
-### Step 4 — Check alerter is installed
-
-```bash
-which alerter 2>/dev/null || echo "not found"
-```
-
-If not found, tell the user:
-
-> **You need alerter for macOS notifications.**
->
-> ```bash
-> brew install vjeantet/tap/alerter
-> ```
-
-**Wait for the user to confirm before continuing.**
-
 ---
 
 ## Phase 2 — Questionnaire
@@ -83,7 +67,15 @@ If they need to target a specific vault in later CLI commands, use `vault="VAULT
 
 ---
 
-**Q3: When do you want your daily check-in reminder?**
+**Q3: Do you want macOS notification reminders? (recommended)**
+
+> "Would you like macOS notifications to remind you to check in at end of day and do your weekly review? This is optional but recommended."
+
+If yes, continue with Q3a and Q3b. If no, skip to Q4 and skip Phase 5.
+
+---
+
+**Q3a: When do you want your daily check-in reminder?**
 
 > "What time should I remind you to do your end-of-day check-in? This runs Monday–Friday. (e.g. 5pm, 17:30)"
 
@@ -93,7 +85,7 @@ Convert to hour and minute:
 
 ---
 
-**Q4: When do you want your weekly review reminder?**
+**Q3b: When do you want your weekly review reminder?**
 
 Ask for the day:
 > "Which day for the weekly review reminder? (e.g. Friday, Sunday)"
@@ -107,7 +99,7 @@ Convert to day number and hour/minute:
 
 ---
 
-**Q5: What kind of work do you do?**
+**Q4: What kind of work do you do?**
 
 > "What's your role? (e.g. software engineer, product manager, designer — a sentence is fine)"
 
@@ -204,7 +196,29 @@ obsidian plugin:install id=dataview enable
 
 ---
 
-## Phase 5 — Set up launchd agents
+## Phase 5 — Set up launchd agents (optional)
+
+**Skip this phase entirely if the user said no to reminders in Q3.**
+
+### 5a. Check alerter is installed
+
+```bash
+which alerter 2>/dev/null || echo "not found"
+```
+
+If not found, tell the user:
+
+> **You need alerter for macOS notifications.**
+>
+> ```bash
+> brew install vjeantet/tap/alerter
+> ```
+>
+> After installing, the first time a notification fires you'll need to enable it in **System Settings → Notifications → Terminal** (or whichever app triggered it). Toggle "Allow Notifications" on.
+
+**Wait for the user to confirm before continuing.**
+
+### 5b. Install launchd agents
 
 Check if claudia launchd agents already exist:
 ```bash
@@ -213,7 +227,7 @@ launchctl list 2>/dev/null | grep claudia
 
 If any exist, show them and ask: "Existing claudia launchd agents found. Replace them?"
 
-Install the agents using the install script. Convert the user's check-in time (Q3) and weekly review schedule (Q4) to the required arguments:
+Install the agents using the install script. Convert the user's check-in time (Q3a) and weekly review schedule (Q3b) to the required arguments:
 
 - Day names → numbers: Monday=1, Tuesday=2, Wednesday=3, Thursday=4, Friday=5, Saturday=6, Sunday=0
 - Time → HOUR and MINUTE: e.g. "5pm" → hour=17, minute=0; "4:30pm" → hour=16, minute=30
@@ -238,8 +252,7 @@ launchctl list | grep claudia
 
 **Name**: [name]
 **Vault**: [vault path]
-**Daily check-in**: weekdays at [time]
-**Weekly reminder**: [day] at [time]
+**Reminders**: [if enabled: "weekdays at [time], weekly on [day] at [time]" / if disabled: "off"]
 
 ### Done automatically
 - [x] CLAUDE.md configured
@@ -248,8 +261,8 @@ launchctl list | grep claudia
 - [x] Atlas and Template files seeded (via Obsidian CLI)
 - [x] Daily note template configured
 - [x] Dataview plugin installed and enabled
-- [x] Daily check-in launchd agent installed
-- [x] Weekly reminder launchd agent installed
+- [x] Daily check-in launchd agent installed (if reminders enabled)
+- [x] Weekly reminder launchd agent installed (if reminders enabled)
 
 ### You're ready. Start with:
    cd [PROJECT_PATH] && claude

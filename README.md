@@ -22,7 +22,7 @@ The system uses [Claude Code](https://claude.ai/code) custom skills as the inter
 
 - [Claude Code](https://claude.ai/code) installed
 - [Obsidian](https://obsidian.md) v1.12.4 or later (for the built-in CLI)
-- [alerter](https://github.com/vjeantet/alerter) for macOS notifications (`brew install vjeantet/tap/alerter`)
+- [alerter](https://github.com/vjeantet/alerter) for macOS notifications (optional, for reminders)
 
 ---
 
@@ -200,6 +200,41 @@ Claude walks you through triaging stale ideas one by one, then offers to save th
 
 ```
 /weekly
+```
+
+---
+
+## Notifications
+
+During setup you can optionally enable macOS notification reminders for `/checkin` (weekdays) and `/weekly` (your chosen day). These use [alerter](https://github.com/vjeantet/alerter) and launchd.
+
+### Installing alerter
+
+```bash
+brew install vjeantet/tap/alerter
+```
+
+### Enabling notifications
+
+The first time alerter fires, macOS will silently block it. You need to enable it once:
+
+1. Open **System Settings → Notifications**
+2. Find **Terminal** (or whichever app triggered the first notification)
+3. Toggle **Allow Notifications** on
+
+After that, notifications will appear on schedule.
+
+### Managing reminders
+
+To reinstall with different times:
+```bash
+bash scripts/install-launchd.sh "$(pwd)" 17 0 5 17 0
+# Args: PROJECT_PATH CHECKIN_HOUR CHECKIN_MINUTE WEEKLY_DAY WEEKLY_HOUR WEEKLY_MINUTE
+```
+
+To remove reminders entirely:
+```bash
+bash scripts/uninstall-launchd.sh
 ```
 
 ---
