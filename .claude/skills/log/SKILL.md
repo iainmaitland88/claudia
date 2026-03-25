@@ -62,11 +62,11 @@ Input: $ARGUMENTS
 6. Insert into the correct quarter in the Work atlas:
    - Determine the quarter from the entry date: Jan-Mar → Q1, Apr-Jun → Q2, Jul-Sep → Q3, Oct-Dec → Q4.
    - Determine the year from the entry date.
-   - Read Work.md: `obsidian read file="Atlas/Work"`
+   - Read Work.md using the Read tool (not `obsidian read`) so you have line numbers for editing.
    - If the year heading `## [YYYY]` does not exist, create it with all four quarter sub-headings.
    - Find the `### QN (...)` heading under the correct year.
    - Insert the entry line (`- [[date-slug]] | [date] | work/TAG`) immediately after the last existing entry under that quarter heading (or directly after the heading if empty).
-   - Write the updated content back using the Edit tool on the vault file directly.
+   - **Use the Edit tool** to insert at the correct position. Do NOT use `obsidian append` — it adds to the end of the file, not to the correct quarter section.
 
 7. Confirm: "Logged as [[date-slug]]. Work atlas now has [N] entries."
 
