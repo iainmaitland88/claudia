@@ -14,18 +14,20 @@ This is an interactive, conversational skill. Wait for the user's response at ea
 
 1. **Pull merged PRs** authored by or contributed to by the user in the last 24h:
    ```bash
-   gh search prs --author @me --merged --merged-at ">=!`date -v-1d +%Y-%m-%d`" --json title,url,repository,updatedAt,headRefName --limit 50
+   gh search prs --author @me --merged --merged-at ">=!`date -v-1d +%Y-%m-%d`" --json title,url,repository,updatedAt,number --limit 50
    ```
 
    Also **pull open PRs** authored by the user:
    ```bash
-   gh search prs --author @me --state open --json title,url,repository,createdAt,headRefName --limit 20
+   gh search prs --author @me --state open --json title,url,repository,createdAt,number --limit 20
    ```
 
    Also **pull PRs reviewed** by the user in the last 24h:
    ```bash
-   gh search prs --reviewed-by @me --merged --merged-at ">=!`date -v-1d +%Y-%m-%d`" --json title,url,repository --limit 20
+   gh search prs --reviewed-by @me --merged --merged-at ">=!`date -v-1d +%Y-%m-%d`" --json title,url,repository,number --limit 20
    ```
+
+   **Note:** `gh search prs` does not support `headRefName`. Branch names are fetched later via `gh pr view` when logging individual PRs (step 5).
    Filter out any PRs that are also in the authored list (don't double-count).
 
 2. **Read existing work logs** to identify what's already been captured:
@@ -74,7 +76,7 @@ This is an interactive, conversational skill. Wait for the user's response at ea
    - Parse what/impact/tag — for grouped PRs, write a single unified description covering the whole piece of work
    - Use the earliest PR's merge date as the log date
    - Include all PR links as a bullet list under the **PRs** field
-   - **Jira ticket extraction**: check the PR branch name (`headRefName`) for a ticket-like prefix (e.g. `ef-123/some-feature` → ticket is `EF-123`). Also check the PR description for ticket references. If found, ask the user to confirm: "Jira ticket EF-123?" If confirmed, add `ticket: EF-123` to the note's YAML frontmatter.
+   - **Jira ticket extraction**: fetch the branch name via `gh pr view [url] --json headRefName` and check for a ticket-like prefix (e.g. `ef-123/some-feature` → ticket is `EF-123`). Also check the PR body for ticket references. If found, ask the user to confirm: "Jira ticket EF-123?" If confirmed, add `ticket: EF-123` to the note's YAML frontmatter.
    - Create the note via `obsidian create`
    - Check for related projects and link them
    - Insert into the correct quarter in the Work atlas (follow the same quarter-routing logic as `/log` step 6)
